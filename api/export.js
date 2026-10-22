@@ -1,6 +1,7 @@
-import { pipeline, redisConfigured } from './_redis.js';
+import { pipeline, redisConfigured, redisSource } from './_redis.js';
 
 // Download all signups as CSV:  https://YOUR-DOMAIN/api/export?key=YOUR_EXPORT_KEY
+// Check the database connection: add &format=health  ·  Just the total: add &format=count
 // Set EXPORT_KEY in Vercel > Project > Settings > Environment Variables.
 const COLS = ['email', 'created_at', 'source', 'country', 'region', 'referrer',
   'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
@@ -17,7 +18,14 @@ export default async function handler(req, res) {
   if (!key || key.length < 12 || req.query.key !== key) {
     return res.status(401).send('Unauthorized');
   }
-  if (!redisConfigured()) return res.status(500).send('Storage not configured');
+  if (req.query.format === 'health') {
+    let ping = 'skipped';
+    if (redisConfigured()) {
+      try { const [r] = await pipeline([['PING']]); ping = r; } catch (e) { ping = `error: ${e.message}`; }
+    }
+    return res.status(200).json({ database: redisSource(), ping });
+  }
+  if (!redisConfigured()) return res.status(500).send(`Storage not configured (${redisSource()})`);
 
   const [emails] = await pipeline([['ZRANGE', 'ww:signups', '0', '-1']]);
   if (req.query.format === 'count') return res.status(200).json({ signups: emails.length });
