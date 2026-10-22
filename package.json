@@ -1,0 +1,6 @@
+{
+  "name": "whisper-wheels",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" }
+}
