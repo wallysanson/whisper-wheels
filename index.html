@@ -56,6 +56,8 @@ p{margin:0}
 .section-head{display:flex;flex-direction:column;gap:16px;max-width:40rem;margin-bottom:56px}
 .section-head h2{font-size:clamp(30px,4vw,44px);font-weight:700}
 .h-split .ln{display:block}
+.m-br{display:none}
+@media (max-width:560px){.m-br{display:inline}}
 .hero h1.h-split .ln{white-space:nowrap}
 .section-head h2.h-big{font-size:clamp(30px,9.4vw,72px);letter-spacing:-0.03em;line-height:1.05;white-space:nowrap}
 @media (max-width:560px){.section-head h2.h-split{font-size:clamp(22px,6.5vw,30px)}}
@@ -333,7 +335,7 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
     <div class="section-head">
       <span class="eyebrow">Why Whisper Wheels</span>
       <h2 id="why">Small fix for a big problem.</h2>
-      <p>Hard plastic wheels on concrete and a lid that bangs with every bump. Whisper Wheels solves both, without replacing your bin.</p>
+      <p>Hard plastic wheels on concrete&nbsp;and<br class="m-br"> a&nbsp;lid that bangs with every bump.<br class="m-br"> Whisper Wheels solves both, without replacing your bin.</p>
     </div>
     <div class="grid-4">
       <div class="benefit">
