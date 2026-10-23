@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<script>document.documentElement.classList.add("js")</script>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -17,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   /* Brand palette */
@@ -260,6 +261,153 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
 .sticky-cta.on{transform:none}
 @media (max-width:760px){.sticky-cta{display:block}body{padding-bottom:84px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* ================= TECH REFRESH ================= */
+html,body{overflow-x:clip}
+.vf-center strong,.vf-center span{position:relative;z-index:1;box-shadow:0 6px 18px -8px rgba(10,120,190,.4)}
+.vf-center span{background:rgba(255,255,255,.9)}
+:root{--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --grad:linear-gradient(135deg,#0A78BE 0%,#1E93DA 55%,#45B0F0 100%);
+  --glow:0 0 0 1px rgba(124,206,252,.55),0 18px 50px -12px rgba(10,120,190,.45)}
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.eyebrow,.pill,.price-tag,.component-art .tag,.vf-label,.art-caption,.faq-group h3,.step-num{font-family:var(--mono);letter-spacing:.08em}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--slate-blue)}
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--grad);box-shadow:0 0 10px rgba(69,176,240,.8)}
+
+/* banner: live status strip */
+.banner{background:linear-gradient(90deg,#075A92,#0A78BE 50%,#075A92);color:#fff;border:0;font-weight:500;position:relative;overflow:hidden}
+.banner::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#7CF0C8;margin-right:10px;vertical-align:1px;box-shadow:0 0 0 0 rgba(124,240,200,.7);animation:ping 2s infinite}
+.banner::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);transform:translateX(-100%);animation:sweep 5s ease-in-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(124,240,200,.7)}80%,100%{box-shadow:0 0 0 10px rgba(124,240,200,0)}}
+@keyframes sweep{0%,40%{transform:translateX(-100%)}80%,100%{transform:translateX(100%)}}
+
+/* buttons: gradient + glow + shine */
+.btn-primary{background:var(--grad);background-size:160% 160%;position:relative;overflow:hidden;box-shadow:0 10px 26px -6px rgba(10,120,190,.55),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);transform:translateX(-120%);transition:transform .7s}
+.btn-primary:hover{background:var(--grad);background-position:100% 0;box-shadow:0 0 0 4px rgba(124,206,252,.35),0 16px 34px -6px rgba(10,120,190,.6);transform:translateY(-2px)}
+.btn-primary:hover::after{transform:translateX(120%)}
+
+/* hero: aurora + grid */
+.hero{background:radial-gradient(60% 55% at 85% 20%,rgba(124,206,252,.55),transparent 70%),radial-gradient(45% 45% at 10% 85%,rgba(69,176,240,.28),transparent 70%),linear-gradient(180deg,#fff 0%,#DDF3FF 100%)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(10,120,190,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(10,120,190,.07) 1px,transparent 1px);background-size:44px 44px;-webkit-mask:radial-gradient(80% 70% at 50% 30%,#000 30%,transparent 80%);mask:radial-gradient(80% 70% at 50% 30%,#000 30%,transparent 80%);pointer-events:none}
+.aurora{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;pointer-events:none;animation:drift 18s ease-in-out infinite alternate}
+.aurora.a1{width:420px;height:420px;background:#7CCEFC;top:-120px;right:-80px}
+.aurora.a2{width:320px;height:320px;background:#45B0F0;bottom:40px;left:-120px;opacity:.35;animation-duration:22s}
+@keyframes drift{to{transform:translate(-60px,50px) scale(1.15)}}
+.hero h1 .ln:last-child{background:linear-gradient(90deg,#0A78BE,#45B0F0,#0A78BE,#7CCEFC,#0A78BE);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 8s linear infinite;padding-bottom:.06em}
+@keyframes shimmer{to{background-position:300% 0}}
+.pill{background:rgba(255,255,255,.75);box-shadow:inset 0 0 0 1px rgba(124,206,252,.8);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pill .dot{background:#0A78BE;box-shadow:0 0 0 0 rgba(10,120,190,.6);animation:pingb 2s infinite}
+@keyframes pingb{0%{box-shadow:0 0 0 0 rgba(10,120,190,.55)}80%,100%{box-shadow:0 0 0 8px rgba(10,120,190,0)}}
+.hero-form{background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 0 0 1px rgba(124,206,252,.45),0 24px 60px -18px rgba(10,120,190,.35)}
+.signup input[type=email]{background:rgba(238,249,255,.85)}
+.price-line b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:26px}
+
+/* hero stage: rotating light border, orbits, floating chips */
+.hero-stage{position:relative}
+.hero-stage .hero-art{position:relative;border:2px solid transparent;background:linear-gradient(#EAF3FD,#EAF3FD) padding-box,conic-gradient(from var(--ang),rgba(124,206,252,.2),#45B0F0,#0A78BE,rgba(124,206,252,.2) 40%,rgba(124,206,252,.2) 60%,#7CCEFC,rgba(124,206,252,.2)) border-box;animation:spin 6s linear infinite;box-shadow:0 30px 80px -20px rgba(10,120,190,.45),0 0 60px -10px rgba(124,206,252,.6)}
+@keyframes spin{to{--ang:360deg}}
+.orbit{position:absolute;left:50%;top:50%;border:1px dashed rgba(10,120,190,.25);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;animation:rot 40s linear infinite}
+.orbit.o1{width:118%;aspect-ratio:1}
+.orbit.o2{width:92%;aspect-ratio:1;border-style:solid;border-color:rgba(124,206,252,.35);animation-direction:reverse;animation-duration:60s}
+.orbit::after{content:"";position:absolute;top:50%;left:-5px;width:10px;height:10px;border-radius:50%;background:#45B0F0;box-shadow:0 0 14px 4px rgba(69,176,240,.7)}
+@keyframes rot{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.chip{position:absolute;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:16px;background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 0 0 1px rgba(124,206,252,.5),0 14px 30px -10px rgba(10,120,190,.35);font:600 13px/1 var(--body);color:var(--slate-deep);white-space:nowrap;animation:float 6s ease-in-out infinite}
+.chip i{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--grad);color:#fff;font-style:normal;font-size:12px}
+.chip.c1{top:9%;left:-22px}
+.chip.c2{top:40%;right:-24px;animation-delay:-2s}
+.chip.c3{bottom:12%;right:-14px;flex-direction:column;align-items:flex-start;gap:8px;animation-delay:-4s}
+.chip .k{font:600 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@keyframes float{50%{transform:translateY(-10px)}}
+.mini-wave{display:flex;align-items:center;gap:3px;height:26px}
+.mini-wave b{width:3px;border-radius:3px;background:var(--grad);animation:eq 1s ease-in-out infinite}
+.mini-wave b:nth-child(n+8){animation:none;height:3px!important;opacity:.7}
+@keyframes eq{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+@media (max-width:900px){.chip.c1{left:4px}.chip.c2{right:4px}.chip.c3{right:8px}.orbit.o1{width:108%}}
+@media (max-width:480px){.chip{font-size:12px;padding:8px 11px}.chip.c2{display:none}}
+
+/* ticker */
+.ticker{position:relative;z-index:2;margin-top:-34px;margin-bottom:56px;background:var(--grad);color:#fff;transform:rotate(-1.2deg) scale(1.02);box-shadow:0 20px 40px -18px rgba(10,120,190,.6);overflow:hidden}
+.ticker-track{display:flex;width:max-content;animation:marq 28s linear infinite}
+.ticker span{display:inline-flex;align-items:center;gap:28px;padding:16px 14px;font:800 clamp(16px,2.2vw,22px)/1 var(--display);letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap}
+.ticker span::after{content:"✦";font-size:.8em;color:#BFE8FF}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* section headings */
+.section-head h2{font-weight:800}
+.band{background:radial-gradient(70% 90% at 100% 0%,rgba(124,206,252,.35),transparent 60%),var(--ice-blue);position:relative;overflow:hidden}
+.band::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(10,120,190,.13) 1px,transparent 1.4px);background-size:22px 22px;-webkit-mask:linear-gradient(180deg,#000,transparent 60%);mask:linear-gradient(180deg,#000,transparent 60%);pointer-events:none}
+.band > .wrap{position:relative}
+
+/* benefit cards: spotlight + gradient edge */
+.grid-4{counter-reset:b}
+.benefit{position:relative;overflow:hidden;counter-increment:b;border:1px solid rgba(124,206,252,.45);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.benefit::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),rgba(124,206,252,.35),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.benefit::after{content:"0" counter(b);position:absolute;top:24px;right:26px;font:600 12px/1 var(--mono);color:#8FB7D3;letter-spacing:.1em}
+.benefit:hover{transform:translateY(-6px);box-shadow:var(--glow)}
+.benefit:hover::before{opacity:1}
+.benefit > *{position:relative}
+.icon{background:var(--grad);border-radius:16px;box-shadow:0 10px 22px -8px rgba(10,120,190,.6),inset 0 1px 0 rgba(255,255,255,.4)}
+.icon svg{stroke:#fff}
+
+/* one step */
+.one-step{border:1px solid rgba(124,206,252,.5);position:relative;overflow:hidden}
+.one-step::before{content:"";position:absolute;width:420px;height:420px;right:-160px;top:-160px;background:radial-gradient(circle,rgba(124,206,252,.45),transparent 65%);pointer-events:none}
+.one-step-art{box-shadow:inset 0 0 0 1px rgba(124,206,252,.5)}
+.one-step-body h3{font-weight:800;background:linear-gradient(90deg,#075A92,#0A78BE 60%,#2B9BE0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ticks svg{background:var(--grad);stroke:#fff}
+.lid-note{background:linear-gradient(90deg,rgba(212,239,255,.9),rgba(238,249,255,.6));box-shadow:inset 3px 0 0 #45B0F0}
+
+/* kit */
+.component{border:1px solid rgba(124,206,252,.45);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.component:hover{transform:translateY(-6px);box-shadow:var(--glow)}
+.component-art{overflow:hidden}
+.component-art .art-img{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.component:hover .art-img{transform:scale(1.05)}
+.component-art .tag.bonus{background:var(--grad);box-shadow:0 0 18px rgba(69,176,240,.6)}
+
+/* video: live waveform */
+.video-frame{background:radial-gradient(60% 80% at 50% 50%,rgba(255,255,255,.35),transparent 70%),linear-gradient(135deg,#BDE6FE 0%,#7CCEFC 60%,#45B0F0 100%);box-shadow:0 30px 80px -24px rgba(10,120,190,.55),inset 0 0 0 1px rgba(255,255,255,.6)}
+.video-frame::before,.video-frame::after{display:none}
+.vf-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.22) 1px,transparent 1px);background-size:40px 40px}
+.vf-wave{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 4%}
+.vf-wave > div{display:flex;align-items:center;justify-content:space-evenly;height:46%}
+.vf-wave b{width:clamp(2px,.5vw,5px);border-radius:4px;background:#fff;height:100%;transform-origin:center;opacity:.9}
+.vf-wave .loud b{animation:eq .9s ease-in-out infinite}
+.vf-wave .calm b{height:6%;opacity:.95;animation:calm 3s ease-in-out infinite}
+@keyframes calm{50%{transform:scaleY(1.6)}}
+.vf-split div+div{border-left:1.5px dashed rgba(255,255,255,.7)}
+.vf-label.after{background:var(--grad)}
+.vf-play{position:relative;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.vf-play::before{content:"";position:absolute;inset:-10px;border-radius:50%;border:2px solid rgba(255,255,255,.8);animation:ring 2.2s ease-out infinite}
+@keyframes ring{from{transform:scale(.85);opacity:1}to{transform:scale(1.35);opacity:0}}
+.vf-center strong{background:rgba(255,255,255,.85);padding:6px 14px;border-radius:999px}
+.vf-center span{background:rgba(255,255,255,.7);padding:4px 12px;border-radius:12px}
+
+/* notice + faq */
+.notice{background:rgba(238,249,255,.8);border-color:rgba(124,206,252,.6);box-shadow:inset 3px 0 0 #45B0F0}
+details{transition:box-shadow .25s,border-color .25s,transform .25s}
+details:hover{border-color:rgba(124,206,252,.8)}
+details[open]{box-shadow:var(--glow);border-color:transparent}
+summary .pm{background:var(--grad)}
+summary .pm svg{stroke:#fff}
+
+/* final CTA: electric panel */
+.cta-card{background:radial-gradient(60% 80% at 100% 0%,rgba(124,206,252,.7),transparent 60%),linear-gradient(135deg,#064C7C 0%,#0A78BE 55%,#1E93DA 100%);box-shadow:0 40px 90px -30px rgba(10,120,190,.7)}
+.cta-card::before{display:none}
+.cta-card::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:36px 36px;-webkit-mask:radial-gradient(70% 90% at 20% 50%,#000,transparent);mask:radial-gradient(70% 90% at 20% 50%,#000,transparent);pointer-events:none}
+.cta-card h2,.cta-card .eyebrow{color:#fff}
+.cta-card .eyebrow::before{background:#BFE8FF}
+.cta-card .copy p{color:#DCF1FF}
+.cta-card .signup{box-shadow:0 30px 60px -20px rgba(0,30,60,.5)}
+.cta-card .copy,.cta-card form{z-index:1}
+
+footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
+
+/* scroll reveal */
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}.js .rv{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -283,6 +431,7 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
 
 <!-- HERO -->
 <section class="hero">
+  <div class="aurora a1" aria-hidden="true"></div><div class="aurora a2" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="pills">
@@ -306,6 +455,8 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
       <div class="price-line"><span class="price-tag">Test price</span><b>$24.99</b><span>Not final. Pricing may change before launch.</span></div>
     </div>
 
+    <div class="hero-stage">
+      <div class="orbit o1" aria-hidden="true"></div><div class="orbit o2" aria-hidden="true"></div>
     <div class="hero-art has-photo">
         <picture>
           <source type="image/avif" srcset="/images/whisper-wheels-floating-pair-revised-560.avif 560w, /images/whisper-wheels-floating-pair-revised-840.avif 840w, /images/whisper-wheels-floating-pair-revised-1122.avif 1122w" sizes="(max-width: 900px) min(520px, calc(100vw - 48px)), 540px">
@@ -314,34 +465,40 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
         </picture>
       <span class="art-caption">Concept visualization</span>
     </div>
+      <span class="chip c1" aria-hidden="true"><i>✓</i>Slip-on fit</span>
+      <span class="chip c2" aria-hidden="true"><i>✦</i>No tools</span>
+      <span class="chip c3" aria-hidden="true"><span class="k">Rattle → hush</span><span class="mini-wave"><b style="height:40%"></b><b style="height:90%;animation-delay:-.2s"></b><b style="height:60%;animation-delay:-.5s"></b><b style="height:100%;animation-delay:-.1s"></b><b style="height:55%;animation-delay:-.7s"></b><b style="height:80%;animation-delay:-.3s"></b><b style="height:45%;animation-delay:-.6s"></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></span></span>
+    </div>
   </div>
 </section>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Coming soon</span><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Coming soon</span><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Coming soon</span><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Coming soon</span></div></div>
 
 <!-- BENEFITS -->
 <section class="band section" aria-labelledby="why">
   <div class="wrap">
-    <div class="section-head">
+    <div class="rv section-head">
       <span class="eyebrow">Why Whisper Wheels</span>
       <h2 id="why">Small fix for a big problem.</h2>
       <p>Hard plastic wheels on concrete and a&nbsp;lid that bangs with every bump. Whisper Wheels solves both, without replacing your bin.</p>
     </div>
     <div class="grid-4">
-      <div class="benefit">
+      <div class="benefit rv">
         <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0A78BE" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="11" r="7"/><circle cx="12" cy="11" r="2.5"/><path d="M3 21h18"/></svg></div>
         <h3>Softer rolling</h3>
         <p>Rubber covers sit between hard wheels and the pavement, designed to help cut down on the clatter on the way to the curb.</p>
       </div>
-      <div class="benefit">
+      <div class="benefit rv">
         <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0A78BE" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"/><path d="M3 8h18"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8"/></svg></div>
         <h3>Quiet lid</h3>
         <p>A foam strip goes where the lid meets the bin, intended to cushion the bang and rattle as it bumps along.</p>
       </div>
-      <div class="benefit">
+      <div class="benefit rv">
         <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0A78BE" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5a2 2 0 0 1 4 0v6"/><path d="M13 9a2 2 0 0 1 4 0v4a7 7 0 0 1-7 7h-.5A5.5 5.5 0 0 1 5 16.5L4 13a2 2 0 0 1 3.4-1.6L9 13"/></svg></div>
         <h3>No tools</h3>
         <p>Designed to go on by hand: slip the covers on, peel and press the strip. Nothing to drill, unscrew or replace.</p>
       </div>
-      <div class="benefit">
+      <div class="benefit rv">
         <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0A78BE" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></div>
         <h3>Keep your bin</h3>
         <p>Made to work with the residential bin you already have. Fit varies, so check the compatibility note below.</p>
@@ -353,11 +510,11 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
 <!-- HOW IT WORKS -->
 <section id="how" class="section" aria-labelledby="how-h">
   <div class="wrap">
-    <div class="section-head">
+    <div class="rv section-head">
       <span class="eyebrow">How it works</span>
       <h2 id="how-h" class="h-big">One simple step,</h2>
     </div>
-    <div class="one-step">
+    <div class="rv one-step">
       <div class="one-step-art has-photo">
         <picture>
           <source type="image/avif" srcset="/images/whisper-wheels-installed-wheel-snug-v3-no-arrow-480.avif 480w, /images/whisper-wheels-installed-wheel-snug-v3-no-arrow-800.avif 800w, /images/whisper-wheels-installed-wheel-snug-v3-no-arrow-1254.avif 1254w" sizes="(max-width: 860px) calc(100vw - 96px), 460px">
@@ -384,13 +541,13 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
 <!-- KIT -->
 <section id="kit" class="band section" aria-labelledby="kit-h">
   <div class="wrap">
-    <div class="section-head">
+    <div class="rv section-head">
       <span class="eyebrow">What's in the kit</span>
       <h2 id="kit-h" class="h-split"><span class="ln">Pair of covers</span> <span class="ln">+ a bonus</span></h2>
       <p>Everything you need for one standard two-wheeled residential trash bin.</p>
     </div>
     <div class="grid-2">
-      <article class="component">
+      <article class="component rv">
         <div class="component-art has-photo">
           <picture>
           <source type="image/avif" srcset="/images/whisper-wheels-product-pair-revised-600.avif 600w, /images/whisper-wheels-product-pair-revised-900.avif 900w, /images/whisper-wheels-product-pair-revised-1200.avif 1200w" sizes="(max-width: 760px) calc(100vw - 48px), 560px">
@@ -403,7 +560,7 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
           <p>One for each wheel. They slip over your bin's existing wheels and grip the tread.</p>
         </div>
       </article>
-      <article class="component">
+      <article class="component rv">
         <div class="component-art has-photo">
           <span class="tag bonus">Bonus</span>
           <picture>
@@ -425,14 +582,15 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
 <!-- VIDEO -->
 <section class="dark section" aria-labelledby="video-h">
   <div class="wrap">
-    <div class="section-head">
+    <div class="rv section-head">
       <span class="eyebrow">Before &amp; after</span>
       <h2 id="video-h">Hear the difference for yourself.</h2>
       <p>We're filming the same bin on the&nbsp;same&nbsp;driveway, with and without Whisper&nbsp;Wheels.<span class="keep punch">The difference is unbelievable.</span></p>
     </div>
-    <div class="video-frame">
+    <div class="rv video-frame">
       <!-- VIDEO: when footage is ready, delete the three placeholder divs below and use:
       <video src="/video/before-after.mp4" poster="/video/poster.jpg" controls playsinline preload="metadata"></video> -->
+      <div class="vf-grid" aria-hidden="true"></div><div class="vf-wave" aria-hidden="true"><div class="loud"></div><div class="calm"></div></div>
       <div class="vf-split" aria-hidden="true"><div><span class="vf-label">Before</span></div><div><span class="vf-label after">After</span></div></div>
       <div class="vf-center">
         <div class="vf-play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="#075A92"><path d="M8 5v14l11-7z"/></svg></div>
@@ -446,7 +604,7 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
 <!-- COMPATIBILITY -->
 <section class="section" style="padding-bottom:0" aria-labelledby="compat-h">
   <div class="wrap">
-    <div class="notice">
+    <div class="rv notice">
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0A78BE" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" style="flex:none"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16.5v.01"/></svg>
       <div>
         <h2 id="compat-h">A note on compatibility</h2>
@@ -492,7 +650,7 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
 <!-- FINAL CTA -->
 <section id="signup" class="section" style="padding-top:0" aria-labelledby="signup-h">
   <div class="wrap">
-    <div class="cta-card">
+    <div class="rv cta-card">
       <div class="copy">
         <span class="eyebrow">Early access</span>
         <h2 id="signup-h">Be first to hear when it's ready.</h2>
@@ -567,6 +725,20 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
     new IntersectionObserver(function(es){heroGone=!es[0].isIntersecting&&es[0].boundingClientRect.top<0;upd();}).observe(hero);
     new IntersectionObserver(function(es){endVisible=es[0].isIntersecting;upd();},{rootMargin:'0px 0px -20% 0px'}).observe(end);
   }
+
+  // Tech refresh: reveal on scroll, card spotlight, waveform bars
+  var rvs=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    rvs.forEach(function(el,i){el.style.transitionDelay=(el.matches('.benefit,.component')?(i%4)*90:0)+'ms';io.observe(el);});
+  } else rvs.forEach(function(el){el.classList.add('in');});
+  document.querySelectorAll('.benefit').forEach(function(c){c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');});});
+  var n=window.innerWidth<560?16:28;
+  document.querySelectorAll('.vf-wave > div').forEach(function(side){var loud=side.classList.contains('loud');
+    for(var i=0;i<n;i++){var b=document.createElement('b');
+      if(loud){b.style.height=(30+Math.random()*70)+'%';b.style.animationDelay=(-Math.random())+'s';b.style.animationDuration=(.6+Math.random()*.6)+'s';}
+      else{b.style.animationDelay=(-Math.random()*3)+'s';}
+      side.appendChild(b);}});
 })();
 </script>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
