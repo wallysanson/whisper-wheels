@@ -173,13 +173,12 @@ p{margin:0}
 .has-photo .art-img{display:block;width:100%;height:100%;object-fit:contain}
 .hero-art.has-photo{aspect-ratio:1122/1402;background:#EAF3FD}
 .hero-art.has-photo::before,.hero-art.has-photo::after{display:none}
-.art-caption-m{display:none;top:14px;bottom:auto}
 .one-step-art.has-photo{aspect-ratio:1/1;padding:0;overflow:hidden;position:relative;background:#E6F4FE}
 .one-step-art.has-photo .art-caption{left:14px;bottom:14px}
 .component-art.has-photo{background:#E6F4FD}
 .grid-2 .component-art.has-photo{aspect-ratio:3/2}
 .component-art.has-photo .tag{z-index:1}
-@media (max-width:900px){.hero-art.has-photo{aspect-ratio:1122/1402}.art-caption-m{display:block}}
+@media (max-width:900px){.hero-art.has-photo{aspect-ratio:1122/1402}}
 @media (max-width:860px){.one-step-art.has-photo{aspect-ratio:1/1}}
 /* Steps */
 .steps{list-style:none;margin:0;padding:0;counter-reset:s}
@@ -309,11 +308,11 @@ footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(-
 
     <div class="hero-art has-photo">
         <picture>
-          <source type="image/avif" srcset="/images/whisper-wheels-kit-callouts-560.avif 560w, /images/whisper-wheels-kit-callouts-840.avif 840w, /images/whisper-wheels-kit-callouts-1122.avif 1122w" sizes="(max-width: 900px) min(520px, calc(100vw - 48px)), 540px">
-          <source type="image/webp" srcset="/images/whisper-wheels-kit-callouts-560.webp 560w, /images/whisper-wheels-kit-callouts-840.webp 840w, /images/whisper-wheels-kit-callouts-1122.webp 1122w" sizes="(max-width: 900px) min(520px, calc(100vw - 48px)), 540px">
-          <img class="art-img" src="/images/whisper-wheels-kit-callouts-840.jpg" srcset="/images/whisper-wheels-kit-callouts-560.jpg 560w, /images/whisper-wheels-kit-callouts-840.jpg 840w, /images/whisper-wheels-kit-callouts-1122.jpg 1122w" sizes="(max-width: 900px) min(520px, calc(100vw - 48px)), 540px" width="1122" height="1402" alt="Concept visualization of a black wheelie bin with labeled callouts for the foam lid strip and the two rubber wheel covers" fetchpriority="high" loading="eager" decoding="async">
+          <source type="image/avif" srcset="/images/whisper-wheels-floating-pair-560.avif 560w, /images/whisper-wheels-floating-pair-840.avif 840w, /images/whisper-wheels-floating-pair-1122.avif 1122w" sizes="(max-width: 900px) min(520px, calc(100vw - 48px)), 540px">
+          <source type="image/webp" srcset="/images/whisper-wheels-floating-pair-560.webp 560w, /images/whisper-wheels-floating-pair-840.webp 840w, /images/whisper-wheels-floating-pair-1122.webp 1122w" sizes="(max-width: 900px) min(520px, calc(100vw - 48px)), 540px">
+          <img class="art-img" src="/images/whisper-wheels-floating-pair-840.jpg" srcset="/images/whisper-wheels-floating-pair-560.jpg 560w, /images/whisper-wheels-floating-pair-840.jpg 840w, /images/whisper-wheels-floating-pair-1122.jpg 1122w" sizes="(max-width: 900px) min(520px, calc(100vw - 48px)), 540px" width="1122" height="1402" alt="Concept visualization of a pair of textured black rubber wheel covers floating against a pale blue background" fetchpriority="high" loading="eager" decoding="async">
         </picture>
-      <span class="art-caption art-caption-m">Concept visualization</span>
+      <span class="art-caption">Concept visualization</span>
     </div>
   </div>
 </section>
