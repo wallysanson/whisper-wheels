@@ -83,14 +83,14 @@ p{margin:0}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 20px/1 var(--display);letter-spacing:-0.015em;color:var(--slate-blue)}
 .logo span,.nav .btn{white-space:nowrap}
 .logo svg,.logo img{flex:none}
-.logo img{height:72px;width:auto;display:block}
+.logo img{height:56px;width:auto;display:block}
 .nav-links{display:flex;align-items:center;gap:30px;font-size:15px;font-weight:500;color:var(--muted)}
 .nav-links a{text-decoration:none;padding:10px 0}
 .nav-links a:hover{color:var(--slate-blue)}
 .nav-links .btn{color:#fff}
 .nav .btn{min-height:44px;padding:0 22px;font-size:15px}
 @media (max-width:820px){.nav-links a:not(.btn){display:none}}
-@media (max-width:420px){.logo{font-size:18px;gap:8px}.logo img{height:56px}.nav .btn{padding:0 16px;font-size:14px}}
+@media (max-width:420px){.logo{font-size:18px;gap:8px}.logo img{height:44px}.nav .btn{padding:0 16px;font-size:14px}}
 
 /* Hero: soft morning sky */
 .hero{position:relative;padding:40px 0 120px;background:linear-gradient(180deg,var(--cloud-white) 0%,#DDF3FF 100%);overflow:hidden}
@@ -419,7 +419,8 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
 
 <header class="wrap nav">
   <a class="logo" href="/" aria-label="Whisper Wheels home">
-    <img src="/logo.png" srcset="/logo.png 1x, /logo@2x.png 2x" alt="Whisper Wheels" width="116" height="72">
+    <img src="/logo.png" srcset="/logo.png 1x, /logo@2x.png 2x" alt="" width="72" height="72">
+    <span>Whisper Wheels</span>
   </a>
   <nav class="nav-links" aria-label="Main">
     <a href="#how">How it works</a>
