@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Signups Dashboard — Whisper Wheels</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0A78BE;--deep:#075A92;--sky:#7CCEFC;--powder:#D4EFFF;--ice:#EEF9FF;--text:#0B2C45;--muted:#3B5B74;--line:#D5ECFA;--card:#fff;--bg:#F5FBFF;--grad:linear-gradient(135deg,#0A78BE 0%,#1E93DA 55%,#45B0F0 100%)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 "Inter",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--blue);font:800 17px/1 "Manrope",sans-serif;letter-spacing:-.015em;min-width:0}
+.brand img{height:40px;width:auto;flex:none}
+.brand span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.actions{display:flex;gap:8px;flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:0;font:600 14px/1 "Inter",sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 6px 16px -6px rgba(10,120,190,.55)}
+.btn-ghost{background:var(--ice);color:var(--deep);box-shadow:inset 0 0 0 1.5px var(--powder)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--sky)}
+.btn[disabled]{opacity:.6;cursor:progress}
+:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+
+/* Lock screen */
+.lock{min-height:calc(100vh - 66px);display:flex;align-items:center;justify-content:center;padding:32px 16px}
+.lock-card{width:100%;max-width:420px;background:#fff;border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 20px 50px -20px rgba(10,120,190,.3)}
+.lock-card h1{font:800 26px/1.15 "Manrope",sans-serif;color:var(--blue);letter-spacing:-.02em;margin:0 0 8px}
+.lock-card p{color:var(--muted);margin:0 0 18px}
+label.lbl{display:block;font-weight:600;font-size:14px;color:var(--deep);margin-bottom:6px}
+input[type=password],input[type=search]{width:100%;min-height:48px;padding:0 16px;font:inherit;font-size:16px;color:var(--text);background:var(--ice);border:1.5px solid var(--powder);border-radius:14px}
+input:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(124,206,252,.45)}
+.check{display:flex;align-items:center;gap:8px;margin:14px 0 18px;color:var(--muted);font-size:14px}
+.check input{width:18px;height:18px;accent-color:var(--blue)}
+.lock-card .btn{width:100%;min-height:48px;font-size:15px}
+.err{display:none;margin-top:14px;background:#FFF4F2;color:#8A2D1B;border-radius:12px;padding:12px 14px;font-size:14px}
+.err.show{display:block}
+
+/* Dashboard */
+main{padding:20px 0 56px}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;margin-bottom:16px}
+.head h1{font:800 clamp(22px,5vw,30px)/1.15 "Manrope",sans-serif;color:var(--blue);letter-spacing:-.02em;margin:0}
+.updated{font-size:13px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px 18px}
+.stat .k{font:500 11px/1 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font:800 30px/1.1 "Manrope",sans-serif;color:var(--blue);letter-spacing:-.02em;margin-top:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stat .s{font-size:13px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;min-width:0}
+.card h2{font:700 16px/1.3 "Manrope",sans-serif;color:var(--deep);margin:0 0 4px;letter-spacing:-.01em}
+.card .sub{font-size:13px;color:var(--muted);margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.chart-wrap{margin-bottom:0}
+#daily{display:block;width:100%;height:auto}
+#daily text{font:500 11px "Inter",sans-serif;fill:var(--muted)}
+.bars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.bars li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;font-size:14px}
+.bars .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
+.bars .num{font-weight:600;color:var(--deep);font-variant-numeric:tabular-nums}
+.bars .num small{font-weight:500;color:var(--muted);margin-left:4px}
+.bars .track{grid-column:1/-1;height:6px;border-radius:6px;background:var(--ice);overflow:hidden}
+.bars .fill{height:100%;border-radius:6px;background:var(--grad)}
+.empty{color:var(--muted);font-size:14px}
+.table-card{margin-top:12px}
+.table-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.table-top input{max-width:280px;min-height:42px;font-size:15px}
+.tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -18px;padding:0 18px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:720px}
+th{text-align:left;font:500 11px/1 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 10px 10px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 10px 11px 0;border-bottom:1px solid var(--ice);vertical-align:top;white-space:nowrap}
+td.email{font-weight:600;color:var(--text);max-width:240px;overflow:hidden;text-overflow:ellipsis}
+td .chip{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--powder);color:var(--deep);font-size:12px;font-weight:600}
+td .muted{color:var(--muted)}
+tr.row{cursor:pointer}
+tr.row:hover td{background:var(--bg)}
+tr.detail td{white-space:normal;background:var(--bg);padding:12px 14px;border-radius:0}
+.kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px 18px;font-size:13px}
+.kv div{min-width:0;overflow-wrap:anywhere}
+.kv b{display:block;font:500 10px/1.4 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.more{margin-top:12px;text-align:center}
+.note{margin-top:14px;font-size:13px;color:var(--muted)}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:720px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat .v{font-size:26px}}
+@media (max-width:560px){.grid{grid-template-columns:1fr}.brand span{display:none}.brand img{height:34px}.actions{gap:6px}.actions .btn{padding:0 11px;min-height:36px;font-size:13px}.long{display:none}.table-top input{max-width:none}}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="wrap bar">
+    <a class="brand" href="/"><img src="/logo.png" srcset="/logo.png 1x, /logo@2x.png 2x" alt=""><span>Whisper Wheels</span></a>
+    <div class="actions" id="actions" hidden>
+      <button class="btn btn-ghost" id="refresh" type="button">Refresh</button>
+      <button class="btn btn-primary" id="csv" type="button"><span class="long">Download </span>CSV</button>
+      <button class="btn btn-ghost" id="lockbtn" type="button" aria-label="Lock dashboard">Lock</button>
+    </div>
+  </div>
+</div>
+
+<section class="lock" id="lock">
+  <form class="lock-card" id="unlock">
+    <h1>Signups dashboard</h1>
+    <p>Private. Enter your EXPORT_KEY from Vercel to see your early-access list.</p>
+    <label class="lbl" for="key">Export key</label>
+    <input type="password" id="key" autocomplete="current-password" required>
+    <label class="check"><input type="checkbox" id="remember" checked> Keep me unlocked on this device</label>
+    <button class="btn btn-primary" type="submit" id="go">Unlock</button>
+    <div class="err" id="err" role="alert"></div>
+  </form>
+</section>
+
+<main class="wrap" id="dash" hidden>
+  <div class="head">
+    <h1>Early-access signups</h1>
+    <span class="updated" id="updated"></span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Total</div><div class="v" id="st-total">0</div><div class="s">all time</div></div>
+    <div class="stat"><div class="k">Today</div><div class="v" id="st-today">0</div><div class="s" id="st-today-s">since midnight</div></div>
+    <div class="stat"><div class="k">Last 7 days</div><div class="v" id="st-week">0</div><div class="s" id="st-week-s"></div></div>
+    <div class="stat"><div class="k">Top channel</div><div class="v" id="st-top">—</div><div class="s" id="st-top-s"></div></div>
+  </div>
+
+  <div class="card chart-wrap">
+    <h2>Signups per day</h2>
+    <p class="sub">Last 30 days, your local time</p>
+    <svg id="daily" viewBox="0 0 900 220" role="img" aria-label="Signups per day, last 30 days"></svg>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h2>Channel</h2><p class="sub">Where the signup came from</p><ul class="bars" id="b-channel"></ul></div>
+    <div class="card"><h2>Campaign</h2><p class="sub">From your tagged links</p><ul class="bars" id="b-campaign"></ul></div>
+    <div class="card"><h2>First found you via</h2><p class="sub">Channel on their very first visit</p><ul class="bars" id="b-first"></ul></div>
+    <div class="card"><h2>Location</h2><p class="sub">Country and state</p><ul class="bars" id="b-loc"></ul></div>
+    <div class="card"><h2>Device</h2><p class="sub">Phone, tablet or computer + system</p><ul class="bars" id="b-device"></ul></div>
+    <div class="card"><h2>Signup form</h2><p class="sub">Top of page or bottom</p><ul class="bars" id="b-form"></ul></div>
+  </div>
+
+  <div class="card table-card">
+    <div class="table-top">
+      <div><h2>All signups</h2><p class="sub" style="margin:0">Newest first. Tap a row for every detail.</p></div>
+      <input type="search" id="q" placeholder="Search email, city, campaign…" aria-label="Search signups">
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Email</th><th>Signed up</th><th>Channel</th><th>Campaign</th><th>Location</th><th>Device</th><th>Visits</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div class="more" id="morewrap" hidden><button class="btn btn-ghost" id="more" type="button">Show more</button></div>
+    <p class="note">Signups from before Oct 25, 2026 only have email, date, form, country, state, referrer and campaign tags.</p>
+  </div>
+</main>
+
+<script>
+(function(){
+  var KEY_STORE='ww_dash_key', key='', data=[], shown=25;
+  var $=function(id){return document.getElementById(id);};
+  function store(op,v){try{if(op==='get')return localStorage.getItem(KEY_STORE)||'';if(op==='set')localStorage.setItem(KEY_STORE,v);else localStorage.removeItem(KEY_STORE);}catch(e){return '';}}
+
+  function host(u){try{return new URL(u).hostname.replace(/^www\.|^l\.|^lm\.|^m\./,'');}catch(e){return '';}}
+  function nice(s){var map={instagram:'Instagram',tiktok:'TikTok',facebook:'Facebook',fb:'Facebook',ig:'Instagram',an:'Meta Audience Network',msg:'Messenger',snapchat:'Snapchat',pinterest:'Pinterest',linkedin:'LinkedIn',x:'X','instagram.com':'Instagram','facebook.com':'Facebook','tiktok.com':'TikTok','google.com':'Google','t.co':'X'};
+    var k=String(s||'').toLowerCase();return map[k]||s;}
+  function channel(r){
+    if(r.utm_source)return nice(r.utm_source);
+    if(r.in_app)return nice(r.in_app);
+    if(r.fbclid)return 'Facebook';
+    if(r.ttclid)return 'TikTok';
+    if(r.gclid)return 'Google';
+    var h=host(r.referrer);
+    if(h&&h!=='whisperwheels.shop')return nice(h);
+    return 'Direct / unknown';
+  }
+  function firstChannel(r){
+    if(r.first_utm_source)return nice(r.first_utm_source);
+    var h=host(r.first_referrer);
+    if(h&&h!=='whisperwheels.shop')return nice(h);
+    if(r.first_visit_at)return 'Direct / unknown';
+    return '';
+  }
+  function loc(r){return [r.city,r.region,r.country].filter(Boolean).join(', ');}
+  function device(r){
+    var d={mobile:'Phone',tablet:'Tablet',desktop:'Computer'}[r.device]||'';
+    return [d,r.os].filter(Boolean).join(' · ');
+  }
+  function when(iso){var d=new Date(iso);return isNaN(d)?'':d.toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});}
+  function dayKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+
+  function count(list,fn){var m={};list.forEach(function(r){var k=fn(r);if(k)m[k]=(m[k]||0)+1;});
+    return Object.keys(m).map(function(k){return [k,m[k]];}).sort(function(a,b){return b[1]-a[1]||a[0].localeCompare(b[0]);});}
+
+  function bars(id,pairs,total,max){
+    var ul=$(id);ul.textContent='';
+    if(!pairs.length){var e=document.createElement('li');e.className='empty';e.textContent='No data yet';ul.appendChild(e);return;}
+    var top=pairs[0][1];
+    pairs.slice(0,max||6).forEach(function(p){
+      var li=document.createElement('li');
+      var n=document.createElement('span');n.className='name';n.textContent=p[0];n.title=p[0];
+      var v=document.createElement('span');v.className='num';v.textContent=p[1];
+      var s=document.createElement('small');s.textContent=Math.round(p[1]/total*100)+'%';v.appendChild(s);
+      var t=document.createElement('span');t.className='track';var f=document.createElement('span');f.className='fill';f.style.width=Math.max(3,p[1]/top*100)+'%';f.style.display='block';t.appendChild(f);
+      li.appendChild(n);li.appendChild(v);li.appendChild(t);ul.appendChild(li);
+    });
+  }
+
+  function chart(list){
+    var svg=$('daily'),NS='http://www.w3.org/2000/svg';svg.textContent='';
+    var days=[],m={},today=new Date();today.setHours(0,0,0,0);
+    for(var i=29;i>=0;i--){var d=new Date(today);d.setDate(d.getDate()-i);days.push(d);m[dayKey(d)]=0;}
+    list.forEach(function(r){var d=new Date(r.created_at);if(!isNaN(d)){var k=dayKey(d);if(k in m)m[k]++;}});
+    var vals=days.map(function(d){return m[dayKey(d)];});
+    var max=Math.max.apply(null,vals),nice=max<=4?4:Math.ceil(max/4)*4;
+    var VW=Math.max(320,Math.round(svg.getBoundingClientRect().width||900)),VH=VW<600?200:220,narrow=VW<600;svg.setAttribute('viewBox','0 0 '+VW+' '+VH);
+    var L=30,R=6,T=12,B=26,W=VW-L-R,H=VH-T-B,bw=W/30;
+    function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;}
+    var defs=el('defs',{}),g=document.createElementNS(NS,'linearGradient');g.id='gb';g.setAttribute('x1','0');g.setAttribute('y1','0');g.setAttribute('x2','0');g.setAttribute('y2','1');
+    [['0','#1E93DA'],['1','#0A78BE']].forEach(function(s){var st=document.createElementNS(NS,'stop');st.setAttribute('offset',s[0]);st.setAttribute('stop-color',s[1]);g.appendChild(st);});defs.appendChild(g);
+    for(var j=0;j<=4;j++){var y=T+H-(H*j/4);
+      el('line',{x1:L,x2:L+W,y1:y,y2:y,stroke:j?'#E6F4FD':'#BFE3F8','stroke-width':1});
+      var tx=el('text',{x:L-8,y:y+4,'text-anchor':'end'});tx.textContent=Math.round(nice*j/4);}
+    vals.forEach(function(v,i){
+      var h=v?Math.max(3,H*v/nice):0,x=L+i*bw+bw*.18;
+      if(h){var r=el('rect',{x:x,y:T+H-h,width:bw*.64,height:h,rx:Math.min(4,bw*.2),fill:'url(#gb)'});
+        var tt=document.createElementNS(NS,'title');tt.textContent=days[i].toLocaleDateString(undefined,{month:'short',day:'numeric'})+': '+v+' signup'+(v===1?'':'s');r.appendChild(tt);}
+      if(narrow?(i===29||i===22||i===15||i===8||i===1):(i%5===4||i===29)){var t=el('text',{x:i===29?L+W:L+i*bw+bw/2,y:VH-8,'text-anchor':i===29?'end':'middle'});t.textContent=i===29?'Today':days[i].toLocaleDateString(undefined,{month:'short',day:'numeric'});}
+    });
+  }
+
+  function td(text,cls){var c=document.createElement('td');if(cls)c.className=cls;c.textContent=text||'';return c;}
+  var LABELS={email:'Email',created_at:'Signed up',source:'Form',country:'Country',region:'State / region',city:'City',referrer:'Referrer',utm_source:'utm_source',utm_medium:'utm_medium',utm_campaign:'utm_campaign',utm_content:'utm_content',utm_term:'utm_term',fbclid:'Meta click ID',ttclid:'TikTok click ID',gclid:'Google click ID',msclkid:'Microsoft click ID',device:'Device',os:'System',browser:'Browser',in_app:'Opened inside app',screen:'Screen',viewport:'Window',language:'Language',timezone:'Time zone',landing_page:'Landing page',visit_count:'Visits',seconds_on_page:'Seconds on page',scroll_depth:'Scrolled (%)',first_visit_at:'First visit',first_landing_page:'First landing page',first_referrer:'First referrer',first_utm_source:'First utm_source',first_utm_medium:'First utm_medium',first_utm_campaign:'First utm_campaign',first_utm_content:'First utm_content',user_agent:'User agent'};
+  function detailRow(r){
+    var tr=document.createElement('tr');tr.className='detail';var c=document.createElement('td');c.colSpan=7;
+    var kv=document.createElement('div');kv.className='kv';
+    Object.keys(LABELS).forEach(function(k){if(!r[k])return;var d=document.createElement('div'),b=document.createElement('b');b.textContent=LABELS[k];d.appendChild(b);
+      d.appendChild(document.createTextNode(k==='created_at'||k==='first_visit_at'?new Date(r[k]).toLocaleString():r[k]));kv.appendChild(d);});
+    c.appendChild(kv);tr.appendChild(c);return tr;
+  }
+  function table(){
+    var q=$('q').value.trim().toLowerCase(),tb=$('rows');tb.textContent='';
+    var list=q?data.filter(function(r){return Object.keys(r).some(function(k){return String(r[k]).toLowerCase().indexOf(q)>-1;})||channel(r).toLowerCase().indexOf(q)>-1;}):data;
+    list.slice(0,shown).forEach(function(r){
+      var tr=document.createElement('tr');tr.className='row';tr.tabIndex=0;
+      tr.appendChild(td(r.email,'email'));tr.appendChild(td(when(r.created_at)));
+      var ch=td('');var s=document.createElement('span');s.className='chip';s.textContent=channel(r);ch.appendChild(s);tr.appendChild(ch);
+      tr.appendChild(td(r.utm_campaign||'—',r.utm_campaign?'':'muted'));
+      tr.appendChild(td(loc(r)||'—',loc(r)?'':'muted'));tr.appendChild(td(device(r)||'—',device(r)?'':'muted'));
+      tr.appendChild(td(r.visit_count||'—',r.visit_count?'':'muted'));
+      function toggle(){var n=tr.nextSibling;if(n&&n.className==='detail')n.remove();else tb.insertBefore(detailRow(r),tr.nextSibling);}
+      tr.addEventListener('click',toggle);tr.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+      tb.appendChild(tr);
+    });
+    if(!list.length){var tr=document.createElement('tr'),c=td(q?'No signups match that search.':'No signups yet.','muted');c.colSpan=7;tr.appendChild(c);tb.appendChild(tr);}
+    $('morewrap').hidden=list.length<=shown;
+  }
+
+  function render(){
+    var total=data.length,now=new Date(),start=new Date(now);start.setHours(0,0,0,0);
+    var wk=new Date(start);wk.setDate(wk.getDate()-6);var pw=new Date(wk);pw.setDate(pw.getDate()-7);
+    var t=0,w=0,p=0;data.forEach(function(r){var d=new Date(r.created_at);if(d>=start)t++;if(d>=wk)w++;else if(d>=pw)p++;});
+    $('st-total').textContent=total;$('st-today').textContent=t;$('st-week').textContent=w;
+    $('st-week-s').textContent=p?((w>=p?'+':'')+Math.round((w-p)/p*100)+'% vs prior week'):(w?'first week with signups':'none yet');
+    var ch=count(data,channel);
+    $('st-top').textContent=ch.length?ch[0][0]:'—';$('st-top-s').textContent=ch.length?ch[0][1]+' of '+total+' signups':'';
+    chart(data);
+    bars('b-channel',ch,total);
+    bars('b-campaign',count(data,function(r){return r.utm_campaign;}),total);
+    var fc=count(data,firstChannel);bars('b-first',fc,fc.reduce(function(a,b){return a+b[1];},0)||1);
+    bars('b-loc',count(data,function(r){return [r.region,r.country].filter(Boolean).join(', ');}),total);
+    var dv=count(data,device);bars('b-device',dv,dv.reduce(function(a,b){return a+b[1];},0)||1);
+    bars('b-form',count(data,function(r){return {hero:'Top of page',footer:'Bottom of page'}[r.source]||r.source;}),total);
+    $('updated').textContent='Updated '+now.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
+    table();
+  }
+
+  function api(fmt){return fetch('/api/export?format='+fmt,{headers:{'x-export-key':key},cache:'no-store'});}
+
+  function load(){
+    var b=$('refresh');b.disabled=true;b.textContent='Loading…';
+    return api('json').then(function(r){
+      if(r.status===401)throw new Error('auth');
+      if(!r.ok)return r.text().then(function(t){throw new Error(t||('Error '+r.status));});
+      return r.json();
+    }).then(function(j){
+      data=(j.signups||[]).slice().sort(function(a,b){return String(b.created_at).localeCompare(String(a.created_at));});
+      $('lock').hidden=true;$('dash').hidden=false;$('actions').hidden=false;render();
+    }).finally(function(){b.disabled=false;b.textContent='Refresh';});
+  }
+
+  function lock(msg){key='';store('del');data=[];$('dash').hidden=true;$('actions').hidden=true;$('lock').hidden=false;$('key').value='';
+    var e=$('err');e.className=msg?'err show':'err';e.textContent=msg||'';$('key').focus();}
+
+  $('unlock').addEventListener('submit',function(e){
+    e.preventDefault();key=$('key').value.trim();if(!key)return;
+    var go=$('go');go.disabled=true;go.textContent='Unlocking…';$('err').className='err';
+    load().then(function(){if($('remember').checked)store('set',key);else store('del');})
+    .catch(function(err){key='';var m=err.message==='auth'?'That key didn’t work. Copy it again from Vercel → Settings → Environment Variables → EXPORT_KEY.':'Couldn’t load signups: '+err.message;var e=$('err');e.textContent=m;e.className='err show';})
+    .finally(function(){go.disabled=false;go.textContent='Unlock';});
+  });
+  $('refresh').addEventListener('click',function(){load().catch(function(err){if(err.message==='auth')lock('Your key no longer works. Enter it again.');else alert('Couldn’t refresh: '+err.message);});});
+  $('lockbtn').addEventListener('click',function(){lock('');});
+  $('q').addEventListener('input',function(){shown=25;table();});
+  $('more').addEventListener('click',function(){shown+=50;table();});
+  var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(data.length)chart(data);},150);});
+  $('csv').addEventListener('click',function(){
+    var b=this;b.disabled=true;
+    api('csv').then(function(r){if(!r.ok)throw new Error('Error '+r.status);return r.blob();}).then(function(bl){
+      var a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download='whisper-wheels-signups-'+dayKey(new Date())+'.csv';document.body.appendChild(a);a.click();
+      setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},1000);
+    }).catch(function(e){alert('Couldn’t download: '+e.message);}).finally(function(){b.disabled=false;});
+  });
+
+  var saved=store('get');
+  if(saved){key=saved;load().catch(function(err){lock(err.message==='auth'?'Your saved key no longer works. Enter it again.':'Couldn’t load signups: '+err.message);});}
+  else $('key').focus();
+})();
+</script>
+</body>
+</html>

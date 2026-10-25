@@ -21,7 +21,8 @@ const csvCell = (v) => {
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   const key = process.env.EXPORT_KEY;
-  if (!key || key.length < 12 || req.query.key !== key) {
+  const given = String(req.headers['x-export-key'] || req.query.key || '');
+  if (!key || key.length < 12 || given !== key) {
     return res.status(401).send('Unauthorized');
   }
   if (req.query.format === 'health') {
@@ -36,7 +37,7 @@ export default async function handler(req, res) {
   const [emails] = await pipeline([['ZRANGE', 'ww:signups', '0', '-1']]);
   if (req.query.format === 'count') return res.status(200).json({ signups: emails.length });
 
-  const rows = [];
+  const records = [];
   for (let i = 0; i < emails.length; i += 500) {
     const chunk = emails.slice(i, i + 500);
     const results = await pipeline(chunk.map((e) => ['HGETALL', `ww:signup:${e}`]));
@@ -44,9 +45,16 @@ export default async function handler(req, res) {
       const o = {};
       for (let k = 0; k < (flat || []).length; k += 2) o[flat[k]] = flat[k + 1];
       if (!o.email) o.email = chunk[j];
-      rows.push(COLS.map((c) => csvCell(o[c])).join(','));
+      records.push(o);
     });
   }
+
+  // Private dashboard (/dashboard) reads this
+  if (req.query.format === 'json') {
+    return res.status(200).json({ signups: records.map((o) => Object.fromEntries(COLS.map((c) => [c, o[c] || '']))) });
+  }
+
+  const rows = records.map((o) => COLS.map((c) => csvCell(o[c])).join(','));
 
   const date = new Date().toISOString().slice(0, 10);
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
