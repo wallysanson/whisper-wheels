@@ -3,8 +3,14 @@ import { pipeline, redisConfigured, redisSource } from './_redis.js';
 // Download all signups as CSV:  https://YOUR-DOMAIN/api/export?key=YOUR_EXPORT_KEY
 // Check the database connection: add &format=health  ·  Just the total: add &format=count
 // Set EXPORT_KEY in Vercel > Project > Settings > Environment Variables.
-const COLS = ['email', 'created_at', 'source', 'country', 'region', 'referrer',
-  'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+const COLS = ['email', 'created_at', 'source', 'country', 'region', 'city', 'referrer',
+  'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+  'fbclid', 'ttclid', 'gclid', 'msclkid',
+  'device', 'os', 'browser', 'in_app', 'screen', 'viewport', 'language', 'timezone',
+  'landing_page', 'visit_count', 'seconds_on_page', 'scroll_depth',
+  'first_visit_at', 'first_landing_page', 'first_referrer',
+  'first_utm_source', 'first_utm_medium', 'first_utm_campaign', 'first_utm_content',
+  'user_agent'];
 
 const csvCell = (v) => {
   let s = v == null ? '' : String(v);

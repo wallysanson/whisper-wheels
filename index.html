@@ -628,7 +628,7 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
       <details open><summary>Can I buy Whisper Wheels right now?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>Not yet. Whisper Wheels is in development and isn't available for purchase. There's no checkout and we don't collect any payment on this site.</p></details>
       <details><summary>When will it launch?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>We don't have a launch date yet. Join the early-access list and we'll email you as soon as there's news.</p></details>
       <details><summary>Is $24.99 the final price?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>No. $24.99 is a test price. The final price hasn't been set and could be higher or lower.</p></details>
-      <details><summary>What happens when I join the list?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>We'll save your email and contact you about the Whisper Wheels launch. Joining is free, doesn't reserve a unit or lock in a price, and you can ask to be removed at any time.</p></details>
+      <details><summary>What happens when I join the list?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>We'll save your email, along with details about your visit like your device and how you found us (see our <a href="/privacy">privacy policy</a>), and contact you about the Whisper Wheels launch. Joining is free, doesn't reserve a unit or lock in a price, and you can ask to be removed at any time.</p></details>
     </div>
 
     <div class="faq-group">
@@ -685,7 +685,22 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
 (function(){
   var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   var params=new URLSearchParams(location.search), utm={};
-  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){var v=params.get(k);if(v)utm[k]=v.slice(0,100);});
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','ttclid','gclid','msclkid'].forEach(function(k){var v=params.get(k);if(v)utm[k]=v.slice(0,200);});
+
+  // Visit context (first visit is remembered on this device; cleared if the visitor clears site data)
+  var T0=Date.now(), maxScroll=0, FT={}, visits=1;
+  function lsGet(k){try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}}
+  function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  FT=lsGet('ww_ft');
+  if(!FT||!FT.at){FT={at:new Date(T0).toISOString(),landing:(location.pathname+location.search).slice(0,300),referrer:document.referrer.slice(0,200),utm:utm};lsSet('ww_ft',FT);}
+  visits=(lsGet('ww_visits')||0)+1;lsSet('ww_visits',visits);
+  addEventListener('scroll',function(){var h=document.documentElement,d=h.scrollHeight-innerHeight;if(d>0)maxScroll=Math.max(maxScroll,Math.round(Math.min(1,scrollY/d)*100));},{passive:true});
+  function ctx(){
+    var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';}catch(e){}
+    return {landing_page:(location.pathname+location.search).slice(0,300),first_visit_at:FT.at,first_landing_page:FT.landing,first_referrer:FT.referrer,first_utm:FT.utm||{},
+      visit_count:visits,seconds_on_page:Math.round((Date.now()-T0)/1000),scroll_depth:maxScroll,
+      screen:screen.width+'x'+screen.height,viewport:innerWidth+'x'+innerHeight,language:(navigator.language||'').slice(0,20),timezone:tz};
+  }
 
   function show(form,type,text){var m=form.querySelector('.msg');m.className='msg show '+type;m.textContent=text;}
 
@@ -697,7 +712,7 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
       if(!EMAIL_RE.test(email)){show(form,'err','Please enter a valid email address.');input.focus();return;}
       btn.disabled=true;var label=btn.textContent;btn.textContent='Joining…';
       fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({email:email,website:form.querySelector('input[name=website]').value,source:form.dataset.source,referrer:document.referrer.slice(0,200),utm:utm})})
+        body:JSON.stringify({email:email,website:form.querySelector('input[name=website]').value,source:form.dataset.source,referrer:document.referrer.slice(0,200),utm:utm,ctx:ctx()})})
       .then(function(r){return r.json().catch(function(){return {ok:false,preview:true};}).then(function(d){d.status=r.status;return d;});})
       .then(function(d){
         if(d.ok){
