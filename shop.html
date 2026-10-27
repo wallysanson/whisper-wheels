@@ -20,6 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/shop.css">
 <script src="/shop-config.js"></script>
+<script src="/assets/pixel.js"></script>
 </head>
 <body class="has-sticky">
 <a class="skip" href="#main">Skip to content</a>
@@ -180,6 +181,7 @@
   var C=window.WW_SHOP||{}, PLAN=(C.whopPlanId||'').trim(), PRICE=Number(C.price)||29.99, MAX=Math.max(1,Number(C.maxQty)||4), qty=1;
   var $=function(s,r){return (r||document).querySelector(s);}, $$=function(s){return document.querySelectorAll(s);};
   function money(n){return '$'+n.toFixed(2);}
+  if(window.fbq)window.fbq('track','ViewContent',{content_name:'Whisper Wheels Kit',content_type:'product',value:PRICE,currency:'USD'});
   $$('.js-price').forEach(function(e){e.textContent=money(PRICE);});
   if(C.shippingNote)$('.js-ship').textContent='· '+C.shippingNote;
   if(C.shipNote)$$('.js-shipnote').forEach(function(e){e.textContent=C.shipNote;});
