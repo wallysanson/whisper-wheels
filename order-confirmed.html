@@ -54,7 +54,7 @@
     <div class="status-icon warn"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#075A92" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 7v6"/><path d="M12 17v.01"/></svg></div>
     <span class="eyebrow">Not completed</span>
     <h1>Your payment didn't go through.</h1>
-    <p>You haven't been charged. You can try again with the same or a different payment method.</p>
+    <p>If you weren't charged, you can try again with the same or a different payment method. If you were charged, your order went through: check your email for a receipt from Whop, and don't pay twice.</p>
     <div class="actions"><a class="btn btn-primary" href="/shop">Try again</a><a class="btn btn-ghost" href="/contact">Need help?</a></div>
   </section>
 
@@ -79,10 +79,11 @@
 (function(){
   var C=window.WW_SHOP||{}, q=new URLSearchParams(location.search);
   var status=(q.get('status')||'').toLowerCase(), pay=q.get('payment')||'', qty=Math.max(1,parseInt(q.get('qty'),10)||1);
-  var state=status==='succeeded'?'succeeded':(status==='failed'||status==='canceled'||status==='cancelled')?'failed':status?'processing':'none';
-  document.querySelector('.status[data-state="'+state+'"]').hidden=false;
+  var looksFailed=status==='failed'||status==='canceled'||status==='cancelled';
   if(C.shipNote)document.querySelectorAll('.js-shipnote').forEach(function(e){e.textContent=C.shipNote;});
-  if(state==='succeeded'){
+  function show(state){document.querySelectorAll('.status').forEach(function(s){s.hidden=s.dataset.state!==state;});}
+  function paid(){
+    show('succeeded');
     if(pay){var r=document.querySelector('.js-ref');r.textContent='Payment reference: '+pay;r.hidden=false;}
     // Count the purchase once per payment, even if this page is reloaded
     var key='ww_paid_'+(pay||'x');
@@ -92,6 +93,17 @@
       if(window.va)window.va('event',{name:'purchase'});
     }}catch(e){}
   }
+  if(status==='succeeded'){paid();return;}
+  if(!pay){show(looksFailed?'failed':status?'processing':'none');return;}
+  // The link can arrive with a misleading status (e.g. after Apple Pay), so ask our own order records,
+  // which Whop updates the moment a payment succeeds. Only call it failed if Whop never reports it paid.
+  show('processing');
+  var tries=0;
+  (function check(){
+    fetch('/api/order-status?payment='+encodeURIComponent(pay),{cache:'no-store'}).then(function(r){return r.json();})
+      .then(function(d){if(d&&d.paid){paid();return;} next();}).catch(next);
+  })();
+  function next(){ if(++tries<10){setTimeout(function(){fetch('/api/order-status?payment='+encodeURIComponent(pay),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){if(d&&d.paid)paid();else next();}).catch(next);},2000);} else if(looksFailed){show('failed');} }
 })();
 </script>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
