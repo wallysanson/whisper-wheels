@@ -15,7 +15,7 @@ Store for Whisper Wheels — "Make Trash Day Silent." Static site on Vercel, pre
 ## Turning on checkout (Whop)
 1. Done: product "Whisper Wheels Sound-Dampening Band Kit" (`prod_hcXM78XgFOJJv`), pricing option "2-pack kit" (`plan_F5v6fUW7QfOIm`) — one-time $29.99, more than one per order allowed, "Collect shipping address" on. Sales tax is collected by Whop at checkout (exclusive).
 2. Done: that plan ID is in `whopPlanId` in `shop-config.js`. If you change the price in Whop, change `price` there too.
-3. Whop → Developer → Webhooks → add `https://whisperwheels.shop/api/whop-webhook`, select the payment events (at least `payment.succeeded`), and copy the webhook secret.
+3. Whop → Developer → Webhooks → Done: webhook "Whisper Wheels orders" → `https://www.whisperwheels.shop/api/whop-webhook` (www — the bare domain redirects), event `payment.succeeded`. Copy its secret (starts `ws_`).
 4. Vercel → Settings → Environment Variables → add `WHOP_WEBHOOK_SECRET` with that secret. Redeploy.
 5. Place a test order and check it shows in Whop and in `/api/export?key=…&type=orders`.
 
