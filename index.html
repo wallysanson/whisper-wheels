@@ -328,6 +328,16 @@ html,body{overflow-x:clip}
 .mini-wave b:nth-child(n+8){animation:none;height:3px!important;opacity:.7}
 @keyframes eq{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
 @media (max-width:900px){.chip.c1{left:4px}.chip.c2{right:4px}.chip.c3{right:8px}.orbit.o1{width:108%}}
+/* Phones: show the product first, compact, then the headline and price */
+@media (max-width:900px){
+  .hero-grid{gap:20px}
+  .hero-stage{order:-1;width:100%;max-width:340px;margin:0 auto}
+  .hero-stage .hero-art.has-photo{aspect-ratio:1/1;max-width:none;border-radius:28px}
+  .hero-stage .hero-art.has-photo .art-img{object-fit:cover;object-position:50% 25%}
+  .orbit,.chip.c2,.chip.c3{display:none}
+  .chip.c1{left:-6px;top:14px}
+}
+@media (max-width:480px){.hero-stage{max-width:270px}}
 @media (max-width:480px){.chip{font-size:12px;padding:8px 11px}.chip.c2{display:none}}
 
 /* ticker */
