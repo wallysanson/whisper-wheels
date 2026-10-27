@@ -5,17 +5,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Whisper Wheels — Make Trash Day Silent</title>
-<meta name="description" content="Whisper Wheels is a coming-soon noise-reduction kit for residential trash bins: two slip-on rubber wheel covers and one adhesive foam lid strip. Get early access.">
+<meta name="description" content="Whisper Wheels is a noise-reduction kit for residential trash bins: two slip-on rubber wheel covers and a bonus foam lid strip. Preorder now for $24.99.">
 <meta name="theme-color" content="#DDF3FF">
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Whisper Wheels — Make Trash Day Silent">
-<meta property="og:description" content="A simple add-on kit for the trash bin you already own. Coming soon — get early access.">
+<meta property="og:description" content="A simple add-on kit for the trash bin you already own. Preorders are open.">
 <meta property="og:image" content="https://whisperwheels.shop/og.png">
 <meta property="og:url" content="https://whisperwheels.shop/">
 <link rel="canonical" href="https://whisperwheels.shop/">
 <meta name="twitter:card" content="summary_large_image">
+<script src="/shop-config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
@@ -248,7 +249,8 @@ details p{color:var(--muted);padding:0 40px 22px 0}
 .cta-card .eyebrow{color:var(--slate-deep)}
 .cta-card .signup{background:#fff;padding:24px;border-radius:var(--radius);box-shadow:var(--shadow)}
 .cta-card .signup .fine{color:var(--muted)}
-@media (max-width:860px){.cta-card{grid-template-columns:1fr;border-radius:32px}}
+.cta-card > *{min-width:0}
+@media (max-width:860px){.cta-card{grid-template-columns:minmax(0,1fr);border-radius:32px}}
 
 footer{background:var(--ice-blue);padding:36px 0 52px;font-size:14px;color:var(--muted)}
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
@@ -406,6 +408,22 @@ summary .pm svg{stroke:#fff}
 
 footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
 
+/* preorder buy boxes */
+.buy-hero{display:flex;flex-direction:column;gap:14px}
+.buy-hero .top-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px}
+.buy-hero .price-line b{font-size:32px}
+.buy-hero .btn{min-height:56px;font-size:17px}
+.assure{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
+.assure li{display:flex;gap:10px;align-items:flex-start}
+.assure li::before{content:"";flex:none;width:7px;height:7px;margin-top:8px;border-radius:50%;background:#45B0F0;box-shadow:0 0 8px rgba(69,176,240,.7)}
+.assure a{color:var(--slate-blue)}
+.cta-card .buy-card{background:#fff;padding:26px;border-radius:var(--radius);box-shadow:0 30px 60px -20px rgba(0,30,60,.5);display:flex;flex-direction:column;gap:16px;z-index:1}
+.cta-card .buy-card .price-line b{font-size:34px}
+.cta-card .buy-card .btn{width:100%;min-height:56px;font-size:17px}
+.cta-card .signup.mini-signup{background:none;padding:16px 0 0;border-radius:0;box-shadow:none;border-top:1px solid var(--line)}
+.mini-signup .lbl{font-size:13px!important;font-weight:500!important;color:var(--muted)!important}
+@media (max-width:480px){.buy-hero .btn{width:100%}}
+
 /* scroll reveal */
 .js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
 .js .rv.in{opacity:1;transform:none}
@@ -415,7 +433,7 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="banner">Coming soon. Whisper Wheels isn't for sale yet. Join the list to hear when it launches.</div>
+<div class="banner">Preorders are open. Cancel for a full refund anytime before your kit ships.</div>
 
 <header class="wrap nav">
   <a class="logo" href="/" aria-label="Whisper Wheels home">
@@ -425,7 +443,7 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
     <a href="#how">How it works</a>
     <a href="#kit">What's in the kit</a>
     <a href="#faq">FAQ</a>
-    <a class="btn btn-primary" href="#signup">Get Early Access</a>
+    <a class="btn btn-primary" href="/shop">Preorder</a>
   </nav>
 </header>
 
@@ -437,24 +455,22 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="pills">
-        <span class="pill"><span class="dot"></span>Coming soon</span>
+        <span class="pill"><span class="dot"></span>Preorders open</span>
         <span class="pill plain">For US homeowners</span>
       </div>
       <h1 class="h-split"><span class="ln">Make Trash Day</span> <span class="ln">Silent.</span></h1>
-      <p class="lede">Whisper Wheels is a simple add-on kit for the trash bin you already own:<br><strong>two slip-on rubber wheel covers</strong> and<br><strong>one foam lid strip</strong>, designed to soften the rumble and rattle of rolling it to the curb.</p>
+      <p class="lede">Whisper Wheels is a simple add-on kit for the trash bin you already own:<br><strong>two slip-on rubber wheel covers</strong> and<br><strong>a bonus foam lid strip</strong>, designed to soften the rumble and rattle of rolling it to the curb.</p>
 
-      <form class="signup hero-form js-signup" data-source="hero" novalidate>
-        <label class="lbl" for="email-hero">Get notified at launch</label>
-        <div class="row">
-          <input id="email-hero" type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
-          <button class="btn btn-primary" type="submit">Get Early Access</button>
+      <div class="hero-form buy-hero">
+        <div class="top-row">
+          <div class="price-line"><b class="js-price">$24.99</b><span>per kit · <span class="js-shipping">Free shipping within the US</span></span></div>
+          <a class="btn btn-primary" href="/shop">Preorder now</a>
         </div>
-        <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-        <div class="msg" role="status" aria-live="polite"></div>
-        <p class="fine">Free to join. No payment, no commitment. Launch updates only — unsubscribe anytime. <a href="/privacy">Privacy</a></p>
-      </form>
-
-      <div class="price-line"><b>$24.99</b><span>Not final. Pricing may change before launch.</span></div>
+        <ul class="assure">
+          <li class="js-shipnote">Ships with our first production run. We'll email your estimated ship date once production is scheduled.</li>
+          <li>Cancel for a full refund anytime before your kit ships.</li>
+        </ul>
+      </div>
     </div>
 
     <div class="hero-stage">
@@ -473,7 +489,7 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
   </div>
 </section>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Coming soon</span><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Coming soon</span><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Coming soon</span><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Coming soon</span></div></div>
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Preorder now</span><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Preorder now</span><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Preorder now</span><span>Softer rolling</span><span>Quiet lid</span><span>No tools</span><span>Keep your bin</span><span>Preorder now</span></div></div>
 
 <!-- BENEFITS -->
 <section class="band section" aria-labelledby="why">
@@ -575,7 +591,7 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
         </div>
       </article>
     </div>
-    <p class="contents-note">Concept visualizations shown.<br>Final materials, dimensions and packaging will be confirmed before launch.</p>
+    <p class="contents-note">Concept visualizations shown.<br>Final materials, dimensions and packaging will be confirmed before shipping.</p>
   </div>
 </section>
 
@@ -595,7 +611,7 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
       <div class="vf-center">
         <div class="vf-play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="#075A92"><path d="M8 5v14l11-7z"/></svg></div>
         <strong>Video coming soon</strong>
-        <span>Join the list and we'll send it to you as soon as it's recorded.</span>
+        <span>We'll post it on Instagram @whisperwheels as soon as it's recorded.</span>
       </div>
     </div>
   </div>
@@ -608,7 +624,7 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0A78BE" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" style="flex:none"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16.5v.01"/></svg>
       <div>
         <h2 id="compat-h">A note on compatibility</h2>
-        <p>Whisper Wheels is being designed for common two-wheeled residential roll-out trash bins. Wheel size, width and shape vary between manufacturers, and we haven't yet confirmed which bins it fits or published a compatibility list. Fit is not guaranteed.</p>
+        <p>Whisper Wheels is being designed for common two-wheeled residential roll-out trash bins. Wheel size, width and shape vary between manufacturers, and we haven't yet confirmed which bins it fits or published a compatibility list. Fit is not guaranteed. If it doesn't fit your bin, tell us within 30 days of delivery for a full refund.</p>
         <p>Many US bins are owned by a city or waste hauler. If yours is, check your local rules before adding anything to it.</p>
       </div>
     </div>
@@ -624,11 +640,12 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
     </div>
 
     <div class="faq-group">
-      <h3>Availability</h3>
-      <details open><summary>Can I buy Whisper Wheels right now?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>Not yet. Whisper Wheels is in development and isn't available for purchase. There's no checkout and we don't collect any payment on this site.</p></details>
-      <details><summary>When will it launch?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>We don't have a launch date yet. Join the early-access list and we'll email you as soon as there's news.</p></details>
-      <details><summary>Is $24.99 the final price?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>No. $24.99 is a test price. The final price hasn't been set and could be higher or lower.</p></details>
-      <details><summary>What happens when I join the list?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>We'll save your email, along with details about your visit like your device and how you found us (see our <a href="/privacy">privacy policy</a>), and contact you about the Whisper Wheels launch. Joining is free, doesn't reserve a unit or lock in a price, and you can ask to be removed at any time.</p></details>
+      <h3>Ordering</h3>
+      <details open><summary>Can I buy Whisper Wheels right now?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>Yes, as a preorder. You pay when you order, which reserves a kit from our first production run. <a href="/shop" style="color:var(--slate-blue)">Preorder here</a>.</p></details>
+      <details><summary>When will it ship?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p class="js-shipnote">Ships with our first production run. We'll email your estimated ship date once production is scheduled.</p></details>
+      <details><summary>Can I cancel my preorder?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>Yes. Email <a href="mailto:contact@whisperwheels.shop" style="color:var(--slate-blue)">contact@whisperwheels.shop</a> anytime before your kit ships and we'll refund you in full. See <a href="/shipping-returns" style="color:var(--slate-blue)">shipping &amp; returns</a>.</p></details>
+      <details><summary>How much does it cost?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p><span class="js-price">$24.99</span> per kit, with free shipping within the US. One kit covers one two-wheeled bin.</p></details>
+      <details><summary>How do I pay?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" stroke="#075A92" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></span></summary><p>Checkout is handled securely by Whop, our payment provider. We never see your card details. You'll get an emailed receipt from Whop.</p></details>
     </div>
 
     <div class="faq-group">
@@ -652,20 +669,28 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
   <div class="wrap">
     <div class="rv cta-card">
       <div class="copy">
-        <span class="eyebrow">Early access</span>
-        <h2 id="signup-h">Be first to hear when it's ready.</h2>
-        <p>Join the launch list for an email when Whisper Wheels becomes available. Free, no payment, no commitment.</p>
+        <span class="eyebrow">Preorder</span>
+        <h2 id="signup-h">Make your next trash day a quiet one.</h2>
+        <p>Reserve your kit from the first production run. Cancel for a full refund anytime before it ships.</p>
       </div>
-      <form class="signup js-signup" data-source="footer" novalidate>
-        <label class="lbl" for="email-footer">Email address</label>
-        <div class="row">
-          <input id="email-footer" type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
-          <button class="btn btn-primary" type="submit">Get Early Access</button>
-        </div>
-        <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-        <div class="msg" role="status" aria-live="polite"></div>
-        <p class="fine">Launch updates only. Unsubscribe anytime. See our <a href="/privacy">privacy policy</a>.</p>
-      </form>
+      <div class="buy-card">
+        <div class="price-line"><b class="js-price">$24.99</b><span>per kit · <span class="js-shipping">Free shipping within the US</span></span></div>
+        <a class="btn btn-primary" href="/shop">Preorder now</a>
+        <ul class="assure">
+          <li>2 rubber wheel covers + bonus foam lid strip</li>
+          <li>Secure checkout by Whop</li>
+          <li>Full refund anytime before it ships</li>
+        </ul>
+        <form class="signup mini-signup js-signup" data-source="footer" novalidate>
+          <label class="lbl" for="email-footer">Not ready yet? Get launch updates by email.</label>
+          <div class="row">
+            <input id="email-footer" type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+            <button class="btn btn-ghost" type="submit">Notify me</button>
+          </div>
+          <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+          <div class="msg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
     </div>
   </div>
 </section>
@@ -674,12 +699,12 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
 
 <footer>
   <div class="wrap foot">
-    <span>© 2026 Whisper Wheels. Coming soon, not yet for sale.</span>
-    <nav aria-label="Footer"><a href="#faq">FAQ</a><a href="#signup">Early access</a><a href="/privacy">Privacy</a><a class="ig" href="https://www.instagram.com/whisperwheels/" target="_blank" rel="noopener" aria-label="Whisper Wheels on Instagram (opens in a new tab)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>@whisperwheels</a><a class="ig" href="https://www.tiktok.com/@whisperwheelsco" target="_blank" rel="noopener" aria-label="Whisper Wheels on TikTok (opens in a new tab)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.3 4.5 5 4.8"/></svg>@whisperwheelsco</a></nav>
+    <span>© 2026 Whisper Wheels · <a href="mailto:contact@whisperwheels.shop">contact@whisperwheels.shop</a></span>
+    <nav aria-label="Footer"><a href="/shop">Preorder</a><a href="#faq">FAQ</a><a href="/shipping-returns">Shipping &amp; returns</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a><a class="ig" href="https://www.instagram.com/whisperwheels/" target="_blank" rel="noopener" aria-label="Whisper Wheels on Instagram (opens in a new tab)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>@whisperwheels</a><a class="ig" href="https://www.tiktok.com/@whisperwheelsco" target="_blank" rel="noopener" aria-label="Whisper Wheels on TikTok (opens in a new tab)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.3 4.5 5 4.8"/></svg>@whisperwheelsco</a></nav>
   </div>
 </footer>
 
-<div class="sticky-cta" id="sticky"><a class="btn btn-primary" href="#signup">Get Early Access</a></div>
+<div class="sticky-cta" id="sticky"><a class="btn btn-primary" href="/shop">Preorder · <span class="js-price">$24.99</span></a></div>
 
 <script>
 (function(){
@@ -717,8 +742,7 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
       .then(function(d){
         if(d.ok){
           form.classList.add('done');
-          show(form,'ok',d.already?"You're already on the list. We'll be in touch at launch.":"You're on the list! We'll email you when Whisper Wheels is ready.");
-          document.querySelectorAll('.js-signup').forEach(function(f){if(f!==form){f.classList.add('done');show(f,'ok',"You're on the list!");}});
+          show(form,'ok',d.already?"You're already on the list.":"You're on the list! We'll email you launch updates.");
           if(window.va)window.va('event',{name:'signup'});
           if(window.fbq)window.fbq('track','Lead');
         } else if(d.preview){
@@ -731,6 +755,11 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
       .finally(function(){btn.disabled=false;btn.textContent=label;});
     });
   });
+
+  var SC=window.WW_SHOP||{};
+  if(SC.price)document.querySelectorAll('.js-price').forEach(function(e){e.textContent='$'+Number(SC.price).toFixed(2);});
+  if(SC.shippingNote)document.querySelectorAll('.js-shipping').forEach(function(e){e.textContent=SC.shippingNote;});
+  if(SC.shipNote)document.querySelectorAll('.js-shipnote').forEach(function(e){e.textContent=SC.shipNote;});
 
   // Sticky mobile CTA: show after the hero form scrolls away, hide near the final signup
   var sticky=document.getElementById('sticky'), hero=document.querySelector('.hero-form'), end=document.getElementById('signup');

@@ -34,6 +34,29 @@ export default async function handler(req, res) {
   }
   if (!redisConfigured()) return res.status(500).send(`Storage not configured (${redisSource()})`);
 
+  // Preorders recorded by /api/whop-webhook:  &type=orders  (with &format=count or &format=json)
+  if (req.query.type === 'orders') {
+    const OCOLS = ['payment_id', 'created_at', 'status', 'last_event', 'email', 'name', 'quantity',
+      'total', 'currency', 'plan_id', 'shipping', 'metadata', 'updated_at'];
+    const [ids] = await pipeline([['ZRANGE', 'ww:orders', '0', '-1']]);
+    if (req.query.format === 'count') return res.status(200).json({ orders: ids.length });
+    const orders = [];
+    for (let i = 0; i < ids.length; i += 500) {
+      const chunk = ids.slice(i, i + 500);
+      const results = await pipeline(chunk.map((id) => ['HGETALL', `ww:order:${id}`]));
+      results.forEach((flat) => {
+        const o = {};
+        for (let k = 0; k < (flat || []).length; k += 2) o[flat[k]] = flat[k + 1];
+        orders.push(Object.fromEntries(OCOLS.map((c) => [c, o[c] || ''])));
+      });
+    }
+    if (req.query.format === 'json') return res.status(200).json({ orders });
+    const date = new Date().toISOString().slice(0, 10);
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="whisper-wheels-orders-${date}.csv"`);
+    return res.status(200).send([OCOLS.join(','), ...orders.map((o) => OCOLS.map((c) => csvCell(o[c])).join(','))].join('\n'));
+  }
+
   const [emails] = await pipeline([['ZRANGE', 'ww:signups', '0', '-1']]);
   if (req.query.format === 'count') return res.status(200).json({ signups: emails.length });
 

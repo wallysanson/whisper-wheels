@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Order Confirmed — Whisper Wheels</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#DDF3FF">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shop.css">
+<script src="/shop-config.js"></script>
+</head>
+<body>
+<div class="top">
+<header class="wrap nav">
+  <a class="logo" href="/" aria-label="Whisper Wheels home"><img src="/logo.png" srcset="/logo.png 1x, /logo@2x.png 2x" alt="Whisper Wheels" width="72" height="72"></a>
+  <nav class="nav-links" aria-label="Main"><a href="/#faq">FAQ</a><a href="/contact">Contact</a></nav>
+</header>
+
+<main class="wrap">
+  <!-- Paid -->
+  <section class="status" data-state="succeeded" hidden>
+    <div class="status-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg></div>
+    <span class="eyebrow">Preorder confirmed</span>
+    <h1>Thank you. Your kit is reserved.</h1>
+    <p>You're in our first production run. A receipt is on its way to your email from Whop.</p>
+    <span class="ref js-ref" hidden></span>
+    <div class="next">
+      <ol>
+        <li><span class="n">1</span><div><strong>Check your inbox</strong><span>Your payment receipt comes from Whop. If you can't find it, check spam or promotions.</span></div></li>
+        <li><span class="n">2</span><div><strong>We'll email your ship date</strong><span class="js-shipnote">Ships with our first production run. We'll email your estimated ship date once production is scheduled.</span></div></li>
+        <li><span class="n">3</span><div><strong>Changed your mind?</strong><span>Email <a href="mailto:contact@whisperwheels.shop">contact@whisperwheels.shop</a> anytime before it ships for a full refund.</span></div></li>
+      </ol>
+    </div>
+    <div class="actions"><a class="btn btn-primary" href="/">Back to home</a><a class="btn btn-ghost" href="https://www.instagram.com/whisperwheels/" target="_blank" rel="noopener">Follow @whisperwheels</a></div>
+  </section>
+
+  <!-- Still processing -->
+  <section class="status" data-state="processing" hidden>
+    <div class="status-icon warn"><span class="spin" style="width:34px;height:34px;border-width:3.5px"></span></div>
+    <span class="eyebrow">Almost there</span>
+    <h1>Your payment is processing.</h1>
+    <p>Some payment methods take a few minutes to confirm. Whop will email you a receipt as soon as it goes through, and you don't need to pay again.</p>
+    <div class="actions"><a class="btn btn-ghost" href="/">Back to home</a><a class="btn btn-ghost" href="/contact">Contact us</a></div>
+  </section>
+
+  <!-- Failed / canceled -->
+  <section class="status" data-state="failed" hidden>
+    <div class="status-icon warn"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#075A92" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 7v6"/><path d="M12 17v.01"/></svg></div>
+    <span class="eyebrow">Not completed</span>
+    <h1>Your payment didn't go through.</h1>
+    <p>You haven't been charged. You can try again with the same or a different payment method.</p>
+    <div class="actions"><a class="btn btn-primary" href="/shop">Try again</a><a class="btn btn-ghost" href="/contact">Need help?</a></div>
+  </section>
+
+  <!-- Opened without a checkout result -->
+  <section class="status" data-state="none" hidden>
+    <span class="eyebrow">Orders</span>
+    <h1>Looking for your order?</h1>
+    <p>Your receipt from Whop has your order details. For anything else, email <a href="mailto:contact@whisperwheels.shop" style="color:var(--slate-blue)">contact@whisperwheels.shop</a>.</p>
+    <div class="actions"><a class="btn btn-primary" href="/shop">Preorder a kit</a></div>
+  </section>
+</main>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Whisper Wheels · <a href="mailto:contact@whisperwheels.shop">contact@whisperwheels.shop</a></span>
+    <nav aria-label="Footer"><a href="/shop">Preorder</a><a href="/shipping-returns">Shipping &amp; returns</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/contact">Contact</a></nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var C=window.WW_SHOP||{}, q=new URLSearchParams(location.search);
+  var status=(q.get('status')||'').toLowerCase(), pay=q.get('payment')||'', qty=Math.max(1,parseInt(q.get('qty'),10)||1);
+  var state=status==='succeeded'?'succeeded':(status==='failed'||status==='canceled'||status==='cancelled')?'failed':status?'processing':'none';
+  document.querySelector('.status[data-state="'+state+'"]').hidden=false;
+  if(C.shipNote)document.querySelectorAll('.js-shipnote').forEach(function(e){e.textContent=C.shipNote;});
+  if(state==='succeeded'){
+    if(pay){var r=document.querySelector('.js-ref');r.textContent='Payment reference: '+pay;r.hidden=false;}
+    // Count the purchase once per payment, even if this page is reloaded
+    var key='ww_paid_'+(pay||'x');
+    try{if(!localStorage.getItem(key)){localStorage.setItem(key,'1');
+      var value=(Number(C.price)||24.99)*qty;
+      if(window.fbq)window.fbq('track','Purchase',{value:value,currency:'USD',num_items:qty},{eventID:pay||undefined});
+      if(window.va)window.va('event',{name:'purchase'});
+    }}catch(e){}
+  }
+})();
+</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
