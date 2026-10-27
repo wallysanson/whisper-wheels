@@ -236,6 +236,7 @@
     loadWhop().then(function(){
       handle=window.WhopElements().checkout.create({
         plan:PLAN, quantity:qty, metadata:Object.assign({quantity:String(qty)},meta),
+        appearance:{theme:{appearance:'light',accentColor:'blue'},classes:{'whop-CheckoutPayButton':{backgroundColor:'#0A78BE',color:'#ffffff'}}},
         returnUrl:location.origin+'/order-confirmed?qty='+qty,
         onComplete:function(c){if(c&&c.result==='payment'){location.href='/order-confirmed?status=succeeded&payment='+encodeURIComponent(c.paymentId||'')+'&qty='+qty;}}
       });
