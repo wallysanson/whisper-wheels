@@ -13,8 +13,8 @@ Store for Whisper Wheels — "Make Trash Day Silent." Static site on Vercel, pre
 - `api/export.js` — signups CSV: `/api/export?key=EXPORT_KEY`; orders CSV: add `&type=orders` (`&format=count` for totals, `&format=health` to check the database)
 
 ## Turning on checkout (Whop)
-1. In Whop: Products → Add product → "Whisper Wheels Kit". Add a **one-time** price of **$24.99**, allow buying more than one, and add a required custom field for **Shipping address** (Whop collects addresses through custom fields on the pricing option).
-2. Copy the plan ID (`plan_…`) into `whopPlanId` in `shop-config.js`. If you change the price in Whop, change `price` there too.
+1. Done: product "Whisper Wheels Sound-Dampening Band Kit" (`prod_hcXM78XgFOJJv`), pricing option "2-pack kit" (`plan_F5v6fUW7QfOIm`) — one-time $29.99, more than one per order allowed, "Collect shipping address" on. Sales tax is collected by Whop at checkout (exclusive).
+2. Done: that plan ID is in `whopPlanId` in `shop-config.js`. If you change the price in Whop, change `price` there too.
 3. Whop → Developer → Webhooks → add `https://whisperwheels.shop/api/whop-webhook`, select the payment events (at least `payment.succeeded`), and copy the webhook secret.
 4. Vercel → Settings → Environment Variables → add `WHOP_WEBHOOK_SECRET` with that secret. Redeploy.
 5. Place a test order and check it shows in Whop and in `/api/export?key=…&type=orders`.

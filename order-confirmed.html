@@ -86,7 +86,7 @@
     // Count the purchase once per payment, even if this page is reloaded
     var key='ww_paid_'+(pay||'x');
     try{if(!localStorage.getItem(key)){localStorage.setItem(key,'1');
-      var value=(Number(C.price)||24.99)*qty;
+      var value=(Number(C.price)||29.99)*qty;
       if(window.fbq)window.fbq('track','Purchase',{value:value,currency:'USD',num_items:qty},{eventID:pay||undefined});
       if(window.va)window.va('event',{name:'purchase'});
     }}catch(e){}
