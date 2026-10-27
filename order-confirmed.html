@@ -49,13 +49,13 @@
     <div class="actions"><a class="btn btn-ghost" href="/">Back to home</a><a class="btn btn-ghost" href="/contact">Contact us</a></div>
   </section>
 
-  <!-- Failed / canceled -->
+  <!-- Not confirmed yet (we never claim a failure we can't see) -->
   <section class="status" data-state="failed" hidden>
     <div class="status-icon warn"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#075A92" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 7v6"/><path d="M12 17v.01"/></svg></div>
-    <span class="eyebrow">Not completed</span>
-    <h1>Your payment didn't go through.</h1>
-    <p>If you weren't charged, you can try again with the same or a different payment method. If you were charged, your order went through: check your email for a receipt from Whop, and don't pay twice.</p>
-    <div class="actions"><a class="btn btn-primary" href="/shop">Try again</a><a class="btn btn-ghost" href="/contact">Need help?</a></div>
+    <span class="eyebrow">Checking your order</span>
+    <h1>We couldn't confirm your payment yet.</h1>
+    <p>If you were charged, your order went through and Whop has emailed you a receipt, so please don't pay again. If no receipt arrives within 10 minutes, the payment didn't complete and you can try again.</p>
+    <div class="actions"><a class="btn btn-ghost" href="/">Back to home</a><a class="btn btn-ghost" href="/contact">Contact us</a></div>
   </section>
 
   <!-- Opened without a checkout result -->
@@ -94,7 +94,7 @@
     }}catch(e){}
   }
   if(status==='succeeded'){paid();return;}
-  if(!pay){show(looksFailed?'failed':status?'processing':'none');return;}
+  if(!pay){show(status?'failed':'none');return;}
   // The link can arrive with a misleading status (e.g. after Apple Pay), so ask our own order records,
   // which Whop updates the moment a payment succeeds. Only call it failed if Whop never reports it paid.
   show('processing');
@@ -103,7 +103,7 @@
     fetch('/api/order-status?payment='+encodeURIComponent(pay),{cache:'no-store'}).then(function(r){return r.json();})
       .then(function(d){if(d&&d.paid){paid();return;} next();}).catch(next);
   })();
-  function next(){ if(++tries<10){setTimeout(function(){fetch('/api/order-status?payment='+encodeURIComponent(pay),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){if(d&&d.paid)paid();else next();}).catch(next);},2000);} else if(looksFailed){show('failed');} }
+  function next(){ if(++tries<10){setTimeout(function(){fetch('/api/order-status?payment='+encodeURIComponent(pay),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){if(d&&d.paid)paid();else next();}).catch(next);},2000);} else{show('failed');} }
 })();
 </script>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
