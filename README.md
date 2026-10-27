@@ -1,6 +1,6 @@
 # Whisper Wheels
 
-Store for Whisper Wheels — "Make Trash Day Silent." Static site on Vercel, preorders paid through Whop.
+Store for Whisper Wheels — "Make Trash Day Quiet." Static site on Vercel, preorders paid through Whop.
 
 - `index.html` — homepage
 - `shop.html` — product page with quantity picker and embedded Whop checkout (`/shop`)
