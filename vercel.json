@@ -27,6 +27,15 @@
           "value": "public, max-age=86400"
         }
       ]
+    },
+    {
+      "source": "/images/whop-icon.png",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
     }
   ],
   "rewrites": [
