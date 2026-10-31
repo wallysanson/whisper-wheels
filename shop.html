@@ -194,7 +194,7 @@
     var base='/images/whisper-wheels-'+b.dataset.base+'-', sz=b.dataset.sizes.split(','), mid=sz[1];
     var set=function(ext){return sz.map(function(s){return base+s+'.'+ext+' '+s+'w';}).join(', ');};
     var p=$('#g-pic'); p.querySelector('source[type="image/avif"]').srcset=set('avif'); p.querySelector('source[type="image/webp"]').srcset=set('webp');
-    var i=$('#g-img'); i.srcset=set('jpg'); i.src=base+mid+'.jpg'; i.alt=b.dataset.alt; i.width=+b.dataset.w; i.height=+b.dataset.h;
+    var i=$('#g-img'); i.srcset=set('jpg'); i.src=base+mid+'.jpg'; i.alt=b.dataset.alt;
     $('#g-tag').textContent=b.dataset.tag; $('.g-main').dataset.shot=b.dataset.base; $('.g-main').style.aspectRatio=b.dataset.w+'/'+b.dataset.h;
     $$('.g-thumbs button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
   });});
