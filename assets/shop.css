@@ -76,6 +76,9 @@ p{margin:0}
 /* the floating-pair photo sits high in its frame: nudge it to the visual center */
 .g-main img{transition:transform .3s}
 .g-main[data-shot="floating-pair-revised"] img{object-fit:cover;transform:translate(-0.91%,3.3%) scale(1.078)}
+/* Foam strip photo: the coil sits a little left of the frame, so nudge it to dead centre; thumbnail shows the whole coil, centred, instead of clipping its ends */
+.g-main[data-shot="bonus-foam-strip-clean"] img{transform:translate(1.33%,-0.25%)}
+.g-thumbs button[data-base="bonus-foam-strip-clean"] img{object-fit:contain;transform:translate(1.6%,-0.2%) scale(1.2)}
 .g-main .tag{position:absolute;z-index:1;top:16px;left:16px;font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px;background:#fff;color:var(--slate-deep);box-shadow:var(--shadow-sm)}
 .g-thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;min-width:0}
 .g-thumbs button{min-width:0;position:relative;padding:0;border:0;cursor:pointer;aspect-ratio:1/1;border-radius:18px;overflow:hidden;background:#EAF3FD;box-shadow:inset 0 0 0 1.5px var(--line);transition:box-shadow .2s,transform .2s}
