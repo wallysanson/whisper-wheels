@@ -85,6 +85,7 @@ p{margin:0}
 .logo span,.nav .btn{white-space:nowrap}
 .logo svg,.logo img{flex:none}
 .logo img{height:72px;width:auto;display:block}
+.logo-word{font:800 22px/1 var(--display,"Manrope",sans-serif);letter-spacing:-0.025em;white-space:nowrap;background:linear-gradient(90deg,#075A92,#0A78BE 55%,#45B0F0);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
 .nav-links{display:flex;align-items:center;gap:30px;font-size:15px;font-weight:500;color:var(--muted)}
 .nav-links a{text-decoration:none;padding:10px 0}
 .nav-links a:hover{color:var(--slate-blue)}
@@ -438,6 +439,9 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
 .js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
 .js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}.js .rv{opacity:1;transform:none}}
+/* Brand name in header: small screens */
+@media (max-width:420px){.logo-word{font-size:18px}}
+@media (max-width:350px){.logo{gap:6px}.logo img{height:44px}.logo-word{font-size:15px}.nav .btn{padding:0 12px;font-size:13px;min-height:40px}}
 </style>
 <script src="/assets/pixel.js"></script>
 </head>
@@ -448,7 +452,7 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
 
 <header class="wrap nav">
   <a class="logo" href="/" aria-label="Whisper Wheels home">
-    <img src="/logo.png" srcset="/logo.png 1x, /logo@2x.png 2x" alt="Whisper Wheels" width="72" height="72">
+    <img src="/logo.png" srcset="/logo.png 1x, /logo@2x.png 2x" alt="" width="72" height="72"><span class="logo-word">Whisper Wheels</span>
   </a>
   <nav class="nav-links" aria-label="Main">
     <a href="#how">How it works</a>
