@@ -46,7 +46,7 @@
   <div class="pdp">
     <!-- Gallery: only the approved product images already used on the homepage -->
     <div class="gallery">
-      <div class="g-main">
+      <div class="g-main" data-shot="floating-pair-revised">
         <span class="tag" id="g-tag">The pair</span>
         <picture id="g-pic">
           <source type="image/avif" srcset="/images/whisper-wheels-floating-pair-revised-560.avif 560w, /images/whisper-wheels-floating-pair-revised-840.avif 840w, /images/whisper-wheels-floating-pair-revised-1122.avif 1122w" sizes="(max-width: 920px) calc(100vw - 48px), 600px">
@@ -66,7 +66,7 @@
     <!-- Buy box -->
     <div class="buy">
       <div><span class="pill"><span class="dot"></span>Preorder</span></div>
-      <h1>The Whisper Wheels Kit</h1>
+      <h1>The Whisper Wheels</h1>
       <p class="sub">A simple add-on for the trash bin you already own, designed to soften the rumble and rattle of rolling it to the curb.</p>
       <div class="price"><b class="js-price">$29.99</b><span>per kit · one kit fits one bin</span></div>
 
@@ -195,7 +195,7 @@
     var set=function(ext){return sz.map(function(s){return base+s+'.'+ext+' '+s+'w';}).join(', ');};
     var p=$('#g-pic'); p.querySelector('source[type="image/avif"]').srcset=set('avif'); p.querySelector('source[type="image/webp"]').srcset=set('webp');
     var i=$('#g-img'); i.srcset=set('jpg'); i.src=base+mid+'.jpg'; i.alt=b.dataset.alt; i.width=+b.dataset.w; i.height=+b.dataset.h;
-    $('#g-tag').textContent=b.dataset.tag; $('.g-main').style.aspectRatio=b.dataset.w+'/'+b.dataset.h;
+    $('#g-tag').textContent=b.dataset.tag; $('.g-main').dataset.shot=b.dataset.base; $('.g-main').style.aspectRatio=b.dataset.w+'/'+b.dataset.h;
     $$('.g-thumbs button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
   });});
 
