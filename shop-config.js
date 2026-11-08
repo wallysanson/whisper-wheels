@@ -10,5 +10,5 @@ window.WW_SHOP = {
   maxQty: 4,             // largest number of kits in one order (one kit = one bin)
   shippingNote: "Free shipping within the US",
   // Shown next to every Preorder button. Keep it honest: if you don't have a date yet, leave the default.
-  shipNote: "Ships with our first production run. We'll email your estimated ship date once production is scheduled."
+  shipNote: "Ships as soon as production is ready. No exact delivery date yet; we'll email you updates along the way."
 };
