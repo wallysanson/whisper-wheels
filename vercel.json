@@ -52,5 +52,10 @@
       "source": "/.well-known/apple-developer-merchantid-domain-association",
       "destination": "https://whop.com/.well-known/apple-platform-integrator/apple-developer-merchantid-domain-association"
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "draft/*": false
+    }
+  }
 }
