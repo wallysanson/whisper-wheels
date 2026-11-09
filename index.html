@@ -172,6 +172,11 @@ p{margin:0}
 .ticks svg{flex:none;width:32px;height:32px;padding:6px;border-radius:50%;background:var(--powder-blue)}
 .lid-note{font-size:15px;color:var(--muted);background:var(--ice-blue);border-radius:var(--radius-sm);padding:14px 18px}
 .lid-note strong{color:var(--slate-deep);font-weight:600}
+.works-card{background:#fff;border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow-sm)}
+.works-art{border-radius:22px;background:linear-gradient(180deg,#DDF3FF 0%,#A6DEFD 100%);aspect-ratio:16/10;display:grid;place-items:center;padding:12px}
+.works-art svg{width:100%;height:auto;max-width:420px}
+.works-card h3{font-size:22px;font-weight:700;margin-top:6px}
+.works-card p{color:var(--muted);font-size:16px}
 @media (max-width:860px){.one-step{grid-template-columns:1fr;gap:32px;padding:24px;border-radius:32px}.one-step-art{aspect-ratio:4/3}}
 /* Product visuals */
 .has-photo picture{display:block;width:100%;height:100%}
@@ -555,7 +560,57 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
 </section>
 
 <!-- HOW IT WORKS -->
-<section id="how" class="section" aria-labelledby="how-h">
+<section id="works" class="section" aria-labelledby="works-h">
+  <div class="wrap">
+    <div class="rv section-head">
+      <span class="eyebrow">How it works</span>
+      <h2 id="works-h">Softened at the source.</h2>
+      <p>Most trash day noise comes from two places. Whisper Wheels is designed to quiet both.</p>
+    </div>
+    <div class="grid-2">
+      <div class="works-card rv">
+        <div class="works-art">
+          <svg viewBox="0 0 320 200" role="img" aria-label="Diagram: a hard plastic wheel sends sharp noise into the ground, while a wheel with a rubber cover softens it">
+            <text x="80" y="26" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="600" fill="#075A92" text-anchor="middle">Hard plastic</text>
+            <text x="240" y="26" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="600" fill="#075A92" text-anchor="middle">With Whisper Wheels</text>
+            <path d="M160 40v140" stroke="#0A78BE" stroke-opacity=".25" stroke-width="2" stroke-dasharray="4 6"/>
+            <path d="M12 172h296" stroke="#0A78BE" stroke-opacity=".45" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="80" cy="120" r="46" fill="#fff" stroke="#3B5B74" stroke-width="6"/>
+            <circle cx="80" cy="120" r="12" fill="none" stroke="#3B5B74" stroke-width="4"/>
+            <path d="M22 162l6-10 6 10 6-10 6 10M114 162l6-10 6 10 6-10 6 10M62 186l6-8 6 8 6-8 6 8 6-8 6 8" fill="none" stroke="#0A78BE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="240" cy="118" r="47" fill="none" stroke="#1D2733" stroke-width="10"/>
+            <circle cx="240" cy="118" r="40" fill="#fff" stroke="#3B5B74" stroke-width="3"/>
+            <circle cx="240" cy="118" r="12" fill="none" stroke="#3B5B74" stroke-width="4"/>
+            <path d="M190 158q7-7 14 0M276 158q7-7 14 0" fill="none" stroke="#45B0F0" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Rubber meets the road.</h3>
+        <p>Hard plastic wheels hit every crack and pebble on the way to the curb, and the hollow bin carries that knock like a drum. A thick rubber cover takes the hit instead, designed to absorb the vibration before it reaches the bin.</p>
+      </div>
+      <div class="works-card rv">
+        <div class="works-art">
+          <svg viewBox="0 0 320 200" role="img" aria-label="Diagram: a lid slamming plastic on plastic, next to a lid landing on a foam strip">
+            <text x="80" y="26" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="600" fill="#075A92" text-anchor="middle">Plastic on plastic</text>
+            <text x="240" y="26" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="600" fill="#075A92" text-anchor="middle">With the lid strip</text>
+            <path d="M160 40v140" stroke="#0A78BE" stroke-opacity=".25" stroke-width="2" stroke-dasharray="4 6"/>
+            <rect x="30" y="94" width="100" height="100" rx="8" fill="#fff" stroke="#3B5B74" stroke-width="4"/>
+            <g transform="rotate(-9 134 88)"><rect x="22" y="70" width="116" height="14" rx="6" fill="#fff" stroke="#3B5B74" stroke-width="4"/></g>
+            <path d="M8 112l7-8 7 8 7-8M54 62l6-9 6 9 6-9" fill="none" stroke="#0A78BE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="190" y="94" width="100" height="100" rx="8" fill="#fff" stroke="#3B5B74" stroke-width="4"/>
+            <rect x="186" y="80" width="108" height="14" rx="5" fill="#7CCEFC" stroke="#45B0F0" stroke-width="2"/>
+            <rect x="182" y="64" width="116" height="14" rx="6" fill="#fff" stroke="#3B5B74" stroke-width="4"/>
+            <path d="M200 52q7-7 14 0M266 52q7-7 14 0" fill="none" stroke="#45B0F0" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Foam where the lid lands.</h3>
+        <p>Every bump lifts the lid and drops it plastic on plastic. The foam strip sits along the rim where the lid closes, so the lid is intended to land on a soft cushion instead of slamming shut.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO INSTALL -->
+<section id="how" class="section" style="padding-top:0" aria-labelledby="how-h">
   <div class="wrap">
     <div class="rv section-head">
       <span class="eyebrow">How to install</span>
@@ -571,14 +626,13 @@ footer{background:linear-gradient(180deg,var(--ice-blue),#DDF3FF)}
       </div>
       <div class="one-step-body">
         <span class="pill"><span class="dot"></span>The only step</span>
-        <h3>Slip on the covers.</h3>
-        <p>Tip the bin back and stretch one rubber cover over each wheel until it sits snugly around the tread. That's it.</p>
+        <h3>Slip on the covers. Press on the strip.</h3>
+        <p>Tip the bin back and stretch one rubber cover over each wheel until it sits snugly around the tread. Then peel the backing off the foam strip and press it along the rim where the lid closes. That's it.</p>
         <ul class="ticks">
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A78BE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>Designed to go on by hand&nbsp;— no&nbsp;tools</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A78BE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>Designed to go on by hand</li>
           <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A78BE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>Works with the bin you already own</li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A78BE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>Nothing to drill, unscrew or replace</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A78BE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>Nothing to unscrew or replace</li>
         </ul>
-        <p class="lid-note"><strong>Bonus for the lid:</strong> peel and press the included foam strip along the rim to silence lid noise.</p>
       </div>
     </div>
   </div>
